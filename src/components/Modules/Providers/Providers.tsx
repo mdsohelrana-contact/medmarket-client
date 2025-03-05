@@ -1,5 +1,6 @@
 "use client";
 
+import StoreProvider from "./StoreProvider/StoreProvider";
 import ThemeProvider from "./ThemeProvider/ThemeProvider";
 
 const Providers = ({
@@ -14,7 +15,7 @@ const Providers = ({
       enableSystem
       disableTransitionOnChange
     >
-      {children}
+      <StoreProvider>{children}</StoreProvider>
     </ThemeProvider>
   );
 };
