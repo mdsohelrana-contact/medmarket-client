@@ -1,29 +1,43 @@
 import { RootState } from "@/redux/store";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+
+export type TUser = {
+  userId: string;
+  role: string;
+  iat: number;
+  exp: number;
+};
 
 export type IAuthState = {
-  token: string | null;
+  user: null | TUser;
+  token: null | string;
 };
 
 const initialState: IAuthState = {
+  user: null,
   token: null,
 };
 
-const authSlice = createSlice({
-  name: "auth", // ✅ Correct naming
+export const authSlice = createSlice({
+  name: "auth",
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<{ token: string | null }>) => {
-      state.token = action.payload.token;
+    setUser: (state, action) => {
+      const { user, token } = action.payload;
+
+      state.user = user;
+      state.token = token;
     },
-    logOutUser: (state) => {
-      state.token = null; // ✅ Clear token on logout
+    logOut: (state) => {
+      state.user = null;
+      state.token = null;
     },
   },
 });
 
-export const { setUser, logOutUser } = authSlice.actions;
+export const { setUser, logOut } = authSlice.actions;
 
-export const currentToken = (state: RootState) => state.user.token;
+export const currentUser = (state: RootState) => state.auth.user;
+export const currentToken = (state: RootState) => state.auth.token;
 
 export default authSlice.reducer;

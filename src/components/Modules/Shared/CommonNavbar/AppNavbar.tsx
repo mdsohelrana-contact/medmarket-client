@@ -1,20 +1,56 @@
 "use client";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-import { CrossIcon, MenuIcon } from "lucide-react";
+import { CrossIcon, Icon, MenuIcon, Package, ShoppingCart } from "lucide-react";
 import ActiveNavLink from "./ActiveNavLink";
-import { navItems } from "./navItems";
+// import { navItems } from "./navItems";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "../ThemeToggle";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { currentUser, logOut } from "@/redux/features/user/authSlice";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const AppNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(currentUser);
+
+  // Define base nav items
+  const baseNavItems = [
+    { label: "Home", href: "/" },
+    { label: "Shop", href: "/shop" },
+    { label: "About", href: "/about" },
+    { label: "Contact", href: "/contact" },
+  ];
+
+  // Conditionally add role-based items
+  const navItems = useMemo(() => {
+    if (!user) return baseNavItems;
+    if (user.role === "admin") {
+      return [...baseNavItems, { label: "Dashboard", href: "/dashboard" }];
+    }
+    if (user.role === "customer") {
+      return [
+        ...baseNavItems,
+        { label: <ShoppingCart className="w-5 h-5" />, href: "/cart" },
+        { label: <Package className="w-5 h-5" />, href: "/orders" },
+      ];
+    }
+
+    return baseNavItems;
+  }, [user]);
 
   // Toggle the mobile menu
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  // Handle logout
+  const handleLogout = () => {
+    dispatch(logOut());
+    localStorage.removeItem("accessToken")
   };
 
   return (
@@ -48,7 +84,7 @@ const AppNavbar = () => {
           </motion.div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-4">
+          <div className="hidden md:flex space-x-3">
             {navItems?.map((navItem, index) => (
               <ActiveNavLink
                 key={index}
@@ -61,11 +97,34 @@ const AppNavbar = () => {
             </div>
           </div>
 
-          <div className="hidden md:flex">
-            <Button variant="outline">
-              <Link href="/login">Login</Link>
-            </Button>
-          </div>
+          {
+            // User Dropdown Menu
+            user ? (
+              <div className="flex items-center space-x-4">
+                {/* <Link href={`/user/${user.userId}`}> */}
+                <motion.div
+                  className="flex items-center space-x-2 text-sm font-medium dark:text-white"
+                  initial={{ opacity: 0, x: -100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Button onClick={handleLogout} size="sm" variant="outline">
+                    <Avatar className="h-8 w-8 rounded-lg">
+                      <AvatarImage src="" alt={user.role} />
+                      <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                    </Avatar>
+                  </Button>
+                </motion.div>
+                {/* </Link> */}
+              </div>
+            ) : (
+              <div className="hidden md:flex">
+                <Button variant="outline">
+                  <Link href="/login">Login</Link>
+                </Button>
+              </div>
+            )
+          }
 
           {/* Mobile Menu Button */}
           <motion.button
@@ -119,9 +178,19 @@ const AppNavbar = () => {
             <div className="ml-3">
               <ThemeToggle />
             </div>
-            <Link href="/login">
-              <Button variant="outline">Login</Button>
-            </Link>
+
+            {/* Auth Button */}
+            <div className="hidden md:flex">
+              {user ? (
+                <Button variant="outline" onClick={handleLogout}>
+                  Logout
+                </Button>
+              ) : (
+                <Button variant="outline">
+                  <Link href="/login">Login</Link>
+                </Button>
+              )}
+            </div>
             {/* <ModeToggle /> */}
           </motion.div>
         </div>

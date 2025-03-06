@@ -4,43 +4,55 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form } from "@/components/ui/form";
 import Link from "next/link";
 import SFormInput from "../../Shared/Form/SFormInput";
-import { Label } from "@/components/ui/label";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { userRegisterValidation } from "./validation/userRegisterValidation";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import SFormImageUpload from "../../Shared/Form/SFormImageUpload";
-import { ChangeEvent, useState } from "react";
-import useImageUploader from "@/components/utils/useImageUploader";
+import { useState } from "react";
+import useImageUploader from "@/utils/useImageUploader";
+import { userRegisterValidation } from "./validation/userAuthValidation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { registerUser } from "@/utils/actions/registerUser";
+import { toast } from "sonner";
 
 const RegisterForm = () => {
   const { uploadImagesToCloudinary, isUploading } = useImageUploader();
   const form = useForm({
-    // resolver: zodResolver(userRegisterValidation),
+    resolver: zodResolver(userRegisterValidation),
   });
 
-  const [profileImageUrl, setProfileImageUrl] = useState<File| File[]>([]); // Store image URL
-
-  console.log("Profile Image URL:", profileImageUrl);
+  const [profileImageUrl, setProfileImageUrl] = useState<File | File[]>([]);
 
   const password = form.watch("password");
   const confirmPassword = form.watch("confirmPassword");
 
-  const handleSubmit: SubmitHandler<FieldValues> = async (data) => {
+  const handleSubmit = async (data: any) => {
+    // Upload the image and get the URL
+    const uploadedImageUrl = await uploadImagesToCloudinary(
+      profileImageUrl,
+      false
+    );
+
     const formData = {
-      ...data, // Add image URL to form data
+      ...data,
+      profileImg: uploadedImageUrl, // Add the uploaded image URL
     };
 
-    const uploadedImageUrls = await uploadImagesToCloudinary(profileImageUrl, true); // Pass true for multiple images
+    // Log or send the form data to your backend
+    try {
+      const res = await registerUser(formData);
 
-    formData.profileImageUrls = uploadedImageUrls;
-
-    console.log("Uploaded Image URLs:", uploadedImageUrls)
-    console.log("Final Form Data:", formData);
-    // You can now send formData to your backend
+      if (!res.success) {
+        toast.error(res.message);
+      }
+      if (res.success) {
+        toast.success(res.message);
+      }
+    } catch (error: any) {
+      toast.error(error.message || "Something went wrong.");
+    }
   };
 
   return (
-    <div className="flex  flex-col w-full gap-6 max-w-2xl mx-auto">
+    <div className="flex flex-col w-full gap-6 max-w-2xl mx-auto">
       <Card className="">
         <CardHeader className="text-center">
           <CardTitle className="text-xl">Create your Free Account</CardTitle>
@@ -61,6 +73,18 @@ const RegisterForm = () => {
                     name="email"
                     placeholder="m@example123.com"
                     label="Email"
+                  />
+                  <SFormInput
+                    control={form.control}
+                    name="phone"
+                    placeholder="++0880000000"
+                    label="Phone Number"
+                  />
+                  <SFormInput
+                    control={form.control}
+                    name="address"
+                    placeholder="123 Main Street, City, Country"
+                    label="Address"
                   />
                   <SFormInput
                     control={form.control}
@@ -85,9 +109,9 @@ const RegisterForm = () => {
                   {/* Image Upload */}
                   <SFormImageUpload
                     control={form.control}
-                    name="profileImage"
+                    name="profileImg"
                     label="Profile Image"
-                    multiple={true}
+                    multiple={false}
                     onImageUpload={setProfileImageUrl}
                   />
 
@@ -97,10 +121,7 @@ const RegisterForm = () => {
                     variant={"outline"}
                     className="w-full"
                   >
-
-                    {
-                      isUploading ? "Registering..." : "Register"
-                    }
+                    {isUploading ? "Registering..." : "Register"}
                   </Button>
                 </div>
                 <div className="text-center text-sm">

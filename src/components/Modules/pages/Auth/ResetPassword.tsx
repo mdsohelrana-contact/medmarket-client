@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/form";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import SFormInput from "../../Shared/Form/SFormInput";
-import { resetPasswordValidation } from "./validation/userRegisterValidation";
+import { resetPasswordValidation } from "./validation/userAuthValidation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 interface LoginFormData {

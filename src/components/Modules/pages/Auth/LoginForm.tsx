@@ -12,18 +12,44 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import SFormInput from "../../Shared/Form/SFormInput";
 import { Label } from "@/components/ui/label";
 import { Form } from "@/components/ui/form";
-import { zodResolver } from "@hookform/resolvers/zod"
-import { userLoginValidation } from "./validation/userRegisterValidation";
-
-
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginValidationSchema } from "./validation/userAuthValidation";
+import { toast } from "sonner";
+import { loginUser } from "@/utils/actions/loginUser";
+import { useAppDispatch } from "@/redux/hooks";
+import { decodedToken } from "@/utils/decodedToken";
+import { setUser } from "@/redux/features/user/authSlice";
 
 const LoginForm = () => {
   const form = useForm({
-    resolver:zodResolver(userLoginValidation)
+    // resolver: zodResolver(loginValidationSchema),
+    defaultValues: {
+      email: "kakad@gamil.com",
+      password: "000000",
+    },
   });
+  const dispatch = useAppDispatch();
 
-  const handleSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log("Form data:", data);
+  const handleSubmit = async (data: any) => {
+    try {
+      const res = await loginUser(data);
+
+      console.log(res);
+
+      if (!res?.data?.accessToken) {
+        toast.error(res.message);
+      }
+      if (res?.data?.accessToken) {
+        toast.success(res.message);
+
+        const user = decodedToken(res?.data?.accessToken);
+
+        dispatch(setUser({ user: user, token: res?.data?.accessToken }));
+        localStorage.setItem("accessToken", res?.data?.accessToken);
+      }
+    } catch (error: any) {
+      toast.error(error.message || "Something went wrong.");
+    }
   };
 
   return (
@@ -57,8 +83,9 @@ const LoginForm = () => {
                   <SFormInput
                     control={form.control}
                     name="email"
-                    placeholder="m@example123.com"
-                    label="Email"
+                    placeholder="valid email/phone"
+                    label="Email/Phone"
+                    type="text"
                   />
 
                   <div className="grid gap-2">
@@ -75,13 +102,11 @@ const LoginForm = () => {
                       control={form.control}
                       name="password"
                       placeholder="m@example123"
-                       type="password"
+                      type="password"
                     />
                   </div>
 
-                  
-
-                  <Button  type="submit" variant={"outline"} className="w-full">
+                  <Button type="submit" variant={"outline"} className="w-full">
                     Login
                   </Button>
                 </div>

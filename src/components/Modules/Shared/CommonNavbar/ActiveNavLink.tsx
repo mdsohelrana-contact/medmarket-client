@@ -1,8 +1,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
+import { ReactNode } from "react";
 
-const ActiveNavLink = ({ href, label }: { href: string; label: string }) => {
+interface ActiveNavLinkProps {
+  href: string;
+  label: ReactNode;
+}
+
+const ActiveNavLink = ({ href, label }: ActiveNavLinkProps) => {
   const pathname = usePathname();
   const isActive = pathname === href;
 
@@ -10,16 +16,16 @@ const ActiveNavLink = ({ href, label }: { href: string; label: string }) => {
     <motion.div
       initial={{ scale: 1 }}
       whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 1 }}
+      whileTap={{ scale: 0.95 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
     >
       <Link
         href={href}
-        className={`block px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ease-in-out font-description  ${
-        isActive
-          ? "bg-primary text-white shadow-md"
-          : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-      }`}
+        className={`block px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ease-in-out font-description ${
+          isActive
+            ? "bg-primary text-white shadow-md"
+            : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+        }`}
       >
         {label}
       </Link>

@@ -15,7 +15,9 @@ const Providers = ({
       enableSystem
       disableTransitionOnChange
     >
-      <StoreProvider>{children}</StoreProvider>
+      <StoreProvider>
+        {children}
+        </StoreProvider>
     </ThemeProvider>
   );
 };

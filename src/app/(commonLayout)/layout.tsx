@@ -4,6 +4,8 @@ import Footer from "@/components/Modules/Shared/Footer";
 const CommonLayout = async ({
   children,
 }: Readonly<{ children: React.ReactNode }>) => {
+
+
   return (
     <div>
       <AppNavbar />
