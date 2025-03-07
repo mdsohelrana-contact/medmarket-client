@@ -1,6 +1,5 @@
 "use server";
 
-import { ICart } from "@/types/medicinesTypes";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
@@ -37,26 +36,6 @@ export const getSingleProduct = async (medicineId: string) => {
   }
 };
 
-// add to cart
-export const addToCart = async (data: any) => {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/cart`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: (await cookies()).get("accessToken")!.value,
-      },
-      body: JSON.stringify(data),
-    });
-
-    revalidateTag("CART");
-    const cartData = await res.json();
-
-    return cartData;
-  } catch (error: any) {
-    return Error(error.message);
-  }
-};
 
 
 

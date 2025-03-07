@@ -5,24 +5,44 @@ import { ShoppingCart, Eye, Heart, Truck, BadgeDollarSign } from "lucide-react";
 import { IMedicine } from "@/types/medicinesTypes";
 import Image from "next/image";
 import Link from "next/link";
+import { toast } from "sonner";
+import { addToCart } from "@/utils/actions/cart";
 
 const ProductCard = ({ medicine }: { medicine: IMedicine }) => {
-  console.log(medicine);
+  // Handle Add to Cart with productId and quantity
+  const handleAddToCart = async () => {
+    const id = toast.loading("Adding to Cart...");
+
+    try {
+      const cartData = {
+        medicineId: medicine?._id,
+      };
+
+      const response = await addToCart(cartData);
+
+      if (response?.success) {
+        toast.success("Added to Cart Successfully", { id: id });
+      }
+    } catch (error) {
+      toast.error("Error adding to cart");
+    }
+  };
+
   return (
     <>
-      <Link href={`/shop/${medicine?._id}`}>
-        <Card className="p-4 cursor-pointer  rounded-xl shadow-lg">
-          {/* Product Image */}
-          <div className="  rounded-lg flex items-center justify-center">
-            <Image
-              src={medicine?.imageUrl}
-              width={300}
-              height={200}
-              alt={medicine?.name}
-            />
-          </div>
+      <Card className="p-4 rounded-xl shadow-lg">
+        {/* Product Image */}
+        <div className="  rounded-lg flex items-center justify-center">
+          <Image
+            src={medicine?.imageUrl}
+            width={300}
+            height={200}
+            alt={medicine?.name}
+          />
+        </div>
 
-          <CardContent className="mt-4">
+        <CardContent className="mt-4">
+          <Link href={`/shop/${medicine?._id}`}>
             {/* Discount Badge */}
             <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded-lg">
               Up to 35% off
@@ -50,21 +70,22 @@ const ProductCard = ({ medicine }: { medicine: IMedicine }) => {
                 <BadgeDollarSign className="w-4 h-4 mr-1" /> Best Price
               </div>
             </div>
+          </Link>
 
-            {/* Price & Add to Cart */}
-            <div className="flex items-center justify-between mt-4">
-              <span className="text-2xl font-bold">${medicine?.price}</span>
-              <Button
-                variant={"default"}
-                className=" flex items-center space-x-2"
-              >
-                <ShoppingCart className="w-5 h-5" />
-                <span>Add to cart</span>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </Link>
+          {/* Price & Add to Cart */}
+          <div className="flex items-center justify-between mt-4">
+            <span className="text-2xl font-bold">${medicine?.price}</span>
+            <Button
+              onClick={handleAddToCart}
+              variant={"default"}
+              className=" flex items-center space-x-2"
+            >
+              <ShoppingCart className="w-5 h-5" />
+              <span>Add to cart</span>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
     </>
   );
 };

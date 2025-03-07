@@ -72,3 +72,27 @@ export const getOrderData = async (orderId: any) => {
     return Error(error.message);
   }
 };
+
+// create order
+
+// export const createOrder = async (orderData: any) => {
+//   try {
+//     const res = await fetch(
+//       `${process.env.NEXT_PUBLIC_BASE_API}/create-order`,
+//       {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//           Authorization: (await cookies()).get("accessToken")!.value,
+//         },
+//         body: JSON.stringify(orderData),
+//       }
+//     );
+
+//     const order = await res.json();
+
+//     return order;
+//   } catch (error: any) {
+//     return Error(error.message);
+//   }
+// };

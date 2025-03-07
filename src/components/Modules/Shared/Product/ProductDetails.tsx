@@ -9,10 +9,10 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
-import { addToCart } from "@/utils/actions/products";
 import { IMedicine } from "@/types/medicinesTypes";
 import { redirect } from "next/navigation";
 import { createCheckout } from "@/utils/actions/payment";
+import { addToCart } from "@/utils/actions/cart";
 
 const ProductDetails = ({ medicineData }: { medicineData: IMedicine }) => {
   //   state for better performance
@@ -72,17 +72,11 @@ const ProductDetails = ({ medicineData }: { medicineData: IMedicine }) => {
         },
       ],
     };
-
     const res = await createCheckout(orderData);
-
     if (res.success && res?.data?.redirectUrl) {
       toast.success("Processing for Purchase...");
-      console.log(res.data?.redirectUrl, "order ");
-
       redirect(res?.data?.redirectUrl);
     }
-
-    console.log(res);
   };
 
   const medicine = medicineData;
