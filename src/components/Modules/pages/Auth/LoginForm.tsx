@@ -8,12 +8,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import SFormInput from "../../Shared/Form/SFormInput";
 import { Label } from "@/components/ui/label";
 import { Form } from "@/components/ui/form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { loginValidationSchema } from "./validation/userAuthValidation";
 import { toast } from "sonner";
 import { loginUser } from "@/utils/actions/loginUser";
 import { useAppDispatch } from "@/redux/hooks";
@@ -24,7 +22,7 @@ const LoginForm = () => {
   const form = useForm({
     // resolver: zodResolver(loginValidationSchema),
     defaultValues: {
-      email: "kakad@gamil.com",
+      email: "admin33@gmail.com",
       password: "000000",
     },
   });

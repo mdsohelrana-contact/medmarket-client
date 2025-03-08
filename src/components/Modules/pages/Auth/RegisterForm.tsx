@@ -82,12 +82,6 @@ const RegisterForm = () => {
                   />
                   <SFormInput
                     control={form.control}
-                    name="address"
-                    placeholder="123 Main Street, City, Country"
-                    label="Address"
-                  />
-                  <SFormInput
-                    control={form.control}
                     name="password"
                     placeholder="m@example123"
                     label="Password"

@@ -6,7 +6,6 @@ export const userRegisterValidation = z.object({
     .string({ required_error: "Phone number is required.Minimum 10" })
     .min(10),
   email: z.string({ required_error: "Email is required." }).email(),
-  address: z.string({ required_error: "Address is required." }).min(5),
   password: z.string({ required_error: "Password is required." }).min(3).max(6),
   confirmPassword: z
     .string({ required_error: "Confirm Password is required." })
