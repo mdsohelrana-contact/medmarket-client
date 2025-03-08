@@ -1,20 +1,26 @@
 "use server";
 
-import { revalidateTag } from "next/cache";
-import { cookies } from "next/headers";
-
-// get all products
-export const getAllProducts = async () => {
+export const getAllProducts = async (filters = {}) => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/medicines`, {
-      next: {
-        tags: ["MEDICINES"],
+    const queryParams = new URLSearchParams(filters).toString();
+    const url = `${process.env.NEXT_PUBLIC_BASE_API}/medicines?${queryParams}`;
+
+    console.log("Fetching from:", url);
+
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
       },
     });
+
     const data = await res.json();
+
+    console.log("API Response Data:", data);
+
     return data;
   } catch (error: any) {
-    return Error(error.message);
+    console.error("API Error:", error.message);
   }
 };
 
@@ -36,8 +42,29 @@ export const getSingleProduct = async (medicineId: string) => {
   }
 };
 
+// // add to cart
+// export const addToCart = async (data: any) => {
+//   try {
 
+//     console.log(data)
 
+//     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/cart`, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: (await cookies())?.get("accessToken")!.value,
+//       },
+//       body: JSON.stringify(data),
+//     });
+
+//     revalidateTag("CART");
+//     const cartData = await res.json();
+
+//     return cartData;
+//   } catch (error: any) {
+//     return Error(error.message);
+//   }
+// };
 
 // add product
 // export const addProduct = async (productData: FormData): Promise<any> => {
