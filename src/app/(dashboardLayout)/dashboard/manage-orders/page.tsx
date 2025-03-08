@@ -1,8 +1,8 @@
-
+import React from 'react'
 
 const ManageProductsPage = () => {
   return (
-    <div>ManageProductsAll Page</div>
+    <div>ManageProductsPage</div>
   )
 }
 

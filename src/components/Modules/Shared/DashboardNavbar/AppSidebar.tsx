@@ -1,5 +1,4 @@
 "use client";
-
 import * as React from "react";
 import {
   Bot,
@@ -42,64 +41,27 @@ const navMain = [
   },
   {
     title: "Mange-Users",
-    url: "#",
+    url: "/dashboard/manage-users",
     icon: SquareTerminal,
     isActive: true,
-    items: [
-      {
-        title: "History",
-        url: "#",
-      },
-      {
-        title: "Starred",
-        url: "#",
-      },
-      {
-        title: "Settings",
-        url: "#",
-      },
-    ],
+  },
+  {
+    title: "Mange-Orders",
+    url: "/dashboard/manage-orders",
+    icon: Bot,
   },
   {
     title: "Mange-Products",
-    url: "#",
+    url: "/dashboard/manage-products",
     icon: Bot,
     items: [
       {
-        title: "Genesis",
-        url: "#",
+        title: "Add Product",
+        url: "/dashboard/manage-products/add-product",
       },
       {
-        title: "Explorer",
-        url: "#",
-      },
-      {
-        title: "Quantum",
-        url: "#",
-      },
-    ],
-  },
- 
-  {
-    title: "Settings",
-    url: "#",
-    icon: Settings2,
-    items: [
-      {
-        title: "General",
-        url: "#",
-      },
-      {
-        title: "Team",
-        url: "#",
-      },
-      {
-        title: "Billing",
-        url: "#",
-      },
-      {
-        title: "Limits",
-        url: "#",
+        title: "Update Product",
+        url: "/dashboard/manage-products/update-product",
       },
     ],
   },
