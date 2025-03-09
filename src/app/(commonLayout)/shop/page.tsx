@@ -1,9 +1,12 @@
 import ShopHome from "@/components/Modules/pages/Shop/ShopeHome";
 import { getAllProducts } from "@/utils/actions/products";
-import React from "react";
 
-const ShopPage = async () => {
-  const { data } = await getAllProducts();
+const ShopPage = async ({
+  searchParams,
+}: {
+  searchParams: Record<string, string | string[] | undefined>;
+}) => {
+  const { data } = await getAllProducts(undefined, searchParams);
   return (
     <div className="my-10">
       <ShopHome medicines={data} />

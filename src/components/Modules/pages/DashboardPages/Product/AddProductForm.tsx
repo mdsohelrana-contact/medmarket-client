@@ -66,6 +66,7 @@ const AddProductForm = () => {
     // Handle image upload
     try {
       const res = await addMedicine(formData);
+
       if (res.success) {
         toast.success("Medicine added successfully!");
         form.reset();
