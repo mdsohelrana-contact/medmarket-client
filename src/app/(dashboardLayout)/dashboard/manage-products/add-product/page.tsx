@@ -1,8 +1,11 @@
+import AddProductForm from "@/components/Modules/pages/DashboardPages/Product/AddProductForm";
 
 const AddProductPage = () => {
   return (
-    <div>AddProductPage</div>
-  )
-}
+    <div>
+      <AddProductForm />
+    </div>
+  );
+};
 
-export default AddProductPage
+export default AddProductPage;

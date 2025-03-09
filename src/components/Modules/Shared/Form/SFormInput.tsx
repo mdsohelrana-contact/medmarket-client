@@ -1,4 +1,5 @@
 "use client";
+
 import {
   FormControl,
   FormField,
@@ -9,14 +10,16 @@ import {
 import { Input } from "@/components/ui/input";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
+import { Control } from "react-hook-form";
 
 interface IFormInputProps {
   name: string;
   label?: string;
   placeholder?: string;
-  control: any;
-  type?: "text" | "password";
+  control: Control<any>;
+  type?: "text" | "password" | "number" 
 }
+
 const SFormInput = ({
   name,
   label,
@@ -27,7 +30,7 @@ const SFormInput = ({
   const [showPassword, setShowPassword] = useState(false);
 
   const handleTogglePassword = () => {
-    setShowPassword((prev: any) => !prev);
+    setShowPassword((prev) => !prev);
   };
 
   return (
@@ -36,14 +39,13 @@ const SFormInput = ({
       name={name}
       render={({ field }) => (
         <FormItem>
-          <FormLabel>{label}</FormLabel>
+          {label && <FormLabel>{label}</FormLabel>}
           <FormControl>
             <div className="relative">
               <Input
-                type={showPassword ? "text" : type} // Toggle between text and password
+                type={type === "password" && showPassword ? "text" : type}
                 placeholder={placeholder}
                 {...field}
-                
               />
               {type === "password" && (
                 <button

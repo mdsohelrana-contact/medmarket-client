@@ -2,8 +2,14 @@
 import * as React from "react";
 import {
   Bot,
-  Settings2,
+  Edit2,
+  Group,
+  HomeIcon,
+  ListOrdered,
+  PlusIcon,
   SquareTerminal,
+  User2,
+  Users,
 } from "lucide-react";
 
 import {
@@ -27,7 +33,7 @@ const navMain = [
   {
     title: "Home",
     url: "#",
-    icon: SquareTerminal,
+    icon: HomeIcon,
     items: [
       {
         title: "Client Home",
@@ -42,26 +48,28 @@ const navMain = [
   {
     title: "Mange-Users",
     url: "/dashboard/manage-users",
-    icon: SquareTerminal,
+    icon: Users,
     isActive: true,
   },
   {
     title: "Mange-Orders",
     url: "/dashboard/manage-orders",
-    icon: Bot,
+    icon: ListOrdered,
   },
   {
     title: "Mange-Products",
     url: "/dashboard/manage-products",
-    icon: Bot,
+    icon: ListOrdered,
     items: [
       {
         title: "Add Product",
         url: "/dashboard/manage-products/add-product",
+        icon:PlusIcon
       },
       {
         title: "Update Product",
         url: "/dashboard/manage-products/update-product",
+        icon:Edit2
       },
     ],
   },
