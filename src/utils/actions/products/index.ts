@@ -29,7 +29,6 @@ export const getAllProducts = async (
 
     const url = `${process.env.NEXT_PUBLIC_BASE_API}/medicines?page=${query?.page}&${queryParams}&sort=${query?.sort}`;
 
-    // console.log(url);
 
     const res = await fetch(url, {
       method: "GET",
@@ -89,8 +88,8 @@ export const addMedicine = async (medicineData: any): Promise<any> => {
 };
 
 // update product
-export const updateProduct = async (
-  productData: FormData,
+export const updateMedicine = async (
+  productData: any,
   medicineId: string
 ): Promise<any> => {
   try {
@@ -98,14 +97,18 @@ export const updateProduct = async (
       `${process.env.NEXT_PUBLIC_BASE_API}/medicine/${medicineId}`,
       {
         method: "PUT",
-        body: JSON.stringify(productData),
         headers: {
+          "Content-Type": "application/json",
           Authorization: (await cookies()).get("accessToken")!.value,
         },
+        body: JSON.stringify(productData),
       }
     );
-    revalidateTag("PRODUCT");
-    const data = res.json();
+    revalidateTag("MEDICINES");
+
+    const data = await res.json();
+
+    console.log(data,"data from server")
 
     return data;
   } catch (error: any) {
@@ -114,7 +117,6 @@ export const updateProduct = async (
 };
 
 // remove medicine
-
 export const removeMedicine = async (medicineId: string) => {
   try {
     const res = await fetch(

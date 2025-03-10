@@ -17,51 +17,7 @@ import { Edit, Edit2, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { removeMedicine } from "@/utils/actions/products";
 import { toast } from "sonner";
-
-// const invoices = [
-//   {
-//     invoice: "INV001",
-//     paymentStatus: "Paid",
-//     totalAmount: "$250.00",
-//     paymentMethod: "Credit Card",
-//   },
-//   {
-//     invoice: "INV002",
-//     paymentStatus: "Pending",
-//     totalAmount: "$150.00",
-//     paymentMethod: "PayPal",
-//   },
-//   {
-//     invoice: "INV003",
-//     paymentStatus: "Unpaid",
-//     totalAmount: "$350.00",
-//     paymentMethod: "Bank Transfer",
-//   },
-//   {
-//     invoice: "INV004",
-//     paymentStatus: "Paid",
-//     totalAmount: "$450.00",
-//     paymentMethod: "Credit Card",
-//   },
-//   {
-//     invoice: "INV005",
-//     paymentStatus: "Paid",
-//     totalAmount: "$550.00",
-//     paymentMethod: "PayPal",
-//   },
-//   {
-//     invoice: "INV006",
-//     paymentStatus: "Pending",
-//     totalAmount: "$200.00",
-//     paymentMethod: "Bank Transfer",
-//   },
-//   {
-//     invoice: "INV007",
-//     paymentStatus: "Unpaid",
-//     totalAmount: "$300.00",
-//     paymentMethod: "Credit Card",
-//   },
-// ];
+import { useRouter } from "next/navigation";
 
 const AllProductsTable = ({
   medicines,
@@ -70,14 +26,12 @@ const AllProductsTable = ({
   medicines: IMedicine[];
   meta: IMeta;
 }) => {
+  const router = useRouter();
 
   // handle remove medicine
   const handleRemoveMedicine = async (medicineId: string) => {
     try {
       const res = await removeMedicine(medicineId);
-
-      console.log("Remove Item Response:", res);
-
       if (res.success) {
         toast.success(res.message);
       } else {
@@ -90,6 +44,10 @@ const AllProductsTable = ({
   };
 
   // handle update medicine
+  const handleUpdateMedicine = (medicineId: string) => {
+    console.log(medicineId, "for update medicine");
+    router.push(`/dashboard/manage-products/update-product/${medicineId}`);
+  };
 
   return (
     <>
@@ -134,7 +92,7 @@ const AllProductsTable = ({
                 <Button
                   variant="ghost"
                   size="icon"
-                  // onClick={() => removeItem(item?.medicineId?._id)}
+                  onClick={() => handleUpdateMedicine(medicine?._id)}
                 >
                   <Edit className="w-6 h-6 " />
                 </Button>

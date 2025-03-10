@@ -1,9 +1,9 @@
 "use client";
 
-import { useParams } from "next/navigation"; // useParams instead of useRouter
-import { useEffect, useState } from "react"; // Import useState and useEffect
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import ProductDetails from "@/components/Modules/Shared/Product/ProductDetails";
-import { getSingleProduct } from "@/utils/actions/products"; // Your data fetching utility
+import { getSingleProduct } from "@/utils/actions/products";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const MedicineDetails = () => {
