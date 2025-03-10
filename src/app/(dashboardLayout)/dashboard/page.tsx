@@ -1,9 +1,18 @@
-import DashboardHome from "@/components/Modules/Shared/DashboardNavbar/DashboardHome";
+import Dashboard from "@/components/Modules/pages/DashboardPages/DashboardHome/Dashboard";
+import DashboardHome from "@/components/Modules/pages/DashboardPages/DashboardHome/DashboardHome";
+import { getDashboardReport, getMonthlyAnalytic } from "@/utils/actions/dashborad";
 
-const DashboardHomePage = () => {
+
+const DashboardHomePage = async () => {
+  const { meta:analytics  } = await getMonthlyAnalytic();
+  const { meta } = await getDashboardReport();
+
+
+  console.log(meta)
   return (
-    <div className=" bg-red-500 w-full text-center">
-      <DashboardHome />
+    <div className="w-full text-center">
+      <Dashboard data={meta}/> 
+      <DashboardHome monthly={analytics} />
     </div>
   );
 };

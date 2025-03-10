@@ -3,22 +3,17 @@ import { Badge } from "@/components/ui/badge";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { IMedicine } from "@/types/medicinesTypes";
 import { IMeta, IOrderHistoryResponse, Order } from "@/types/orderTypes";
-import { Edit, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { removeMedicine } from "@/utils/actions/products";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { PaginationDemo } from "../Product/All-Products/DemoPagination";
-import { useState } from "react";
 import { updateOrderIntentStatus } from "@/utils/actions/orders";
 
 const AllOrdersTable = ({

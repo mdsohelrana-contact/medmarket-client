@@ -6,7 +6,7 @@ const ShopPage = async ({
 }: {
   searchParams: Record<string, string | string[] | undefined>;
 }) => {
-  const { data } = await getAllProducts(undefined, searchParams);
+  const { data } = await getAllProducts(undefined);
   return (
     <div className="my-10">
       <ShopHome medicines={data} />

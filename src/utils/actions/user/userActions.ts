@@ -1,28 +1,73 @@
-"use server";
+"use server"
 
-import { decodedToken } from "@/utils/decodedToken";
+import { cookies } from "next/headers";
 
-export const getUserData = async () => {
-  const token = localStorage.getItem("accessToken");
-  if (!token) {
-    throw new Error("No token found");
-  }
+// only admin
+export const getAllUsers = async (
+  query?: { [key: string]: string | string[] | undefined },
+) => {
+  try {
+    const queryParams = new URLSearchParams();
 
-  const userInfo = decodedToken(token);
+    if (query?.name) {
+      queryParams.append("name", query?.name.toString());
+    }
+    if (query?.category) {
+      queryParams.append("category", query?.category.toString());
+    }
+    if (query?.symptoms) {
+      queryParams.append(
+        "symptoms",
+        query?.symptoms?.includes(query?.symptoms.toString()).toString()
+      );
+    }
 
-  if (!userInfo?.userId) {
-    throw new Error("Invalid token");
-  }
-  const res = await fetch(
-    `${process.env.BACKEND_API_URL}/users/${userInfo.userId}`,
-    {
+    const url = `${process.env.NEXT_PUBLIC_BASE_API}/users?page=${query?.page}&${queryParams}&sort=${query?.sort}`;
+
+
+    const res = await fetch(url, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+         Authorization: (await cookies()).get("accessToken")!.value,
       },
-    }
-  );
+      next: {
+        tags: ["USERS"],
+      },
+    });
 
-  const userData = await res.json();
-  return userData;
+    const data = await res.json();
+
+    return data;
+  } catch (error: any) {
+    console.error("API Error:", error.message);
+  }
+};
+
+
+
+
+
+// delete user 
+export const deleteUser = async (id: string) => {
+  try {
+    const url = `${process.env.NEXT_PUBLIC_BASE_API}/users/${id}`;
+
+    const res = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+         Authorization: (await cookies()).get("accessToken")!.value,
+      },
+      next: {
+        tags: ["USERS"],
+      },
+    });
+
+    const data = await res.json();
+
+    return data;
+  } catch (error: any) {
+    console.error("API Error:", error.message);
+  }
 };
