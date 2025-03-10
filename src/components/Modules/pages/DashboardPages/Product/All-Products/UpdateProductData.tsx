@@ -7,13 +7,14 @@ import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SFormImageUpload from "@/components/Modules/Shared/Form/SFormImageUpload";
 import useImageUploader from "@/utils/useImageUploader";
 import { IMedicine } from "@/types/medicinesTypes";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { updateMedicine } from "@/utils/actions/products";
+import { useRouter } from "next/navigation";
 
 type FormData = {
   name?: string;
@@ -46,6 +47,7 @@ const UpdateProductForm = ({ medicine }: { medicine: IMedicine }) => {
   } = medicine;
 
   const { uploadImagesToCloudinary, isUploading } = useImageUploader();
+  const router = useRouter();
   const [medicineImageUrl, setMedicineImageUrl] = useState<File | File[]>([]);
 
   const form = useForm<FormData>({
@@ -64,25 +66,8 @@ const UpdateProductForm = ({ medicine }: { medicine: IMedicine }) => {
     },
   });
 
-  // Update default values if `medicine` prop changes
-//   useEffect(() => {
-//     form.reset({
-//       name,
-//       generic_name,
-//       brand_name,
-//       category,
-//       symptoms,
-//       strength,
-//       dosage_form,
-//       price,
-//       stock,
-//       imageUrl: medicineImageUrl,
-//       prescription_required,
-//     });
-//   }, [medicine]);
-
   // Handle Form Submit
-  const handleSubmit = async (data) => {
+  const handleSubmit = async (data: any) => {
     try {
       const uploadedImageUrl = await uploadImagesToCloudinary(
         medicineImageUrl,
@@ -97,15 +82,11 @@ const UpdateProductForm = ({ medicine }: { medicine: IMedicine }) => {
         imageUrl: uploadedImageUrl,
       };
 
-      console.log(updatedData, "updated data from submit");
-
       const res = await updateMedicine(updatedData, _id);
-
-      console.log(res, "from response data");
 
       if (res.success) {
         toast.success(res.message);
-        form.reset(updatedData); // Reset with updated values
+        router.push(`/dashboard/manage-products`);
       } else {
         toast.error(res.message);
       }
@@ -268,15 +249,16 @@ const UpdateProductForm = ({ medicine }: { medicine: IMedicine }) => {
 
           {/* Image Preview */}
           <div className="my-5 flex flex-wrap gap-5">
-            {imageUrl.map((item, index) => (
-              <Image
-                key={index}
-                alt={name}
-                width={100}
-                height={100}
-                src={item}
-              />
-            ))}
+            {Array.isArray(imageUrl) &&
+              imageUrl.map((item: any, index: number) => (
+                <Image
+                  key={index}
+                  alt={name}
+                  width={100}
+                  height={100}
+                  src={item}
+                />
+              ))}
           </div>
 
           {/* Prescription Required */}

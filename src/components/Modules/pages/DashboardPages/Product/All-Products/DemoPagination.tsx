@@ -29,6 +29,8 @@ export function PaginationDemo({ metadata }: IPaginationProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
+  // console.log(metadata)
+
   // Preserve existing query params
   const createQueryString = (params: Record<string, string | number>) => {
     const newParams = new URLSearchParams(searchParams);
