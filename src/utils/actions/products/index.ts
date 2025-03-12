@@ -5,11 +5,6 @@ import { cookies } from "next/headers";
 
 export const getAllProducts = async (
   query?: { [key: string]: string | string[] | undefined },
-  sort?: string
-  // filter?: string,
-  // limit?: number,
-  // offset?: number,
-  // search?: string,
 ) => {
   try {
     const queryParams = new URLSearchParams();

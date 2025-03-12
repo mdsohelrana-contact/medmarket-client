@@ -1,16 +1,6 @@
 "use client";
 import * as React from "react";
-import {
-  Bot,
-  Edit2,
-  Group,
-  HomeIcon,
-  ListOrdered,
-  PlusIcon,
-  SquareTerminal,
-  User2,
-  Users,
-} from "lucide-react";
+import { HomeIcon, ListOrdered, PlusIcon, Users } from "lucide-react";
 
 import {
   Sidebar,
@@ -18,16 +8,14 @@ import {
   SidebarFooter,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { NavUser } from "./NavUser";
 import { NavMain } from "./NavMain";
+import { UserProfile } from "../UserProfile/UserProfile";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { currentUser, logOut } from "@/redux/features/user/authSlice";
+import { getUserById } from "@/utils/actions/user/userActions";
+import { useRouter } from "next/navigation";
 
 // This is sample data.
-
-const user = {
-  name: "shadcn",
-  email: "m@example.com",
-  avatar: "/avatars/shadcn.jpg",
-};
 
 const navMain = [
   {
@@ -64,25 +52,44 @@ const navMain = [
       {
         title: "Add Product",
         url: "/dashboard/manage-products/add-product",
-        icon:PlusIcon
-      },
-      {
-        title: "Update Product",
-        url: "/dashboard/manage-products/update-product",
-        icon:Edit2
+        icon: PlusIcon,
       },
     ],
   },
 ];
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+
+  const router  = useRouter();
+
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(currentUser);
+  const [userData, setUserData] = React.useState<IUser | null>(null);
+
+  // fetch current user information
+  React.useEffect(() => {
+    const fetchUserData = async () => {
+      const { data } = await getUserById(user?.userId as string);
+      setUserData(data);
+    };
+
+    fetchUserData();
+  }, [user?.userId]);
+
+  // Handle logout
+  const handleLogout = () => {
+    dispatch(logOut());
+    localStorage.removeItem("accessToken");
+    router.push("/login");
+  };
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarContent>
         <NavMain items={navMain} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={user} />
+        {userData && <UserProfile user={userData} logoutFn={handleLogout} />}
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

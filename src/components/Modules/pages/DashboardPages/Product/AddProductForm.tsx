@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
-import { productFormSchema } from "./ProductValidation";
 import { Switch } from "@/components/ui/switch";
 import { addMedicine } from "@/utils/actions/products";
 import { toast } from "sonner";

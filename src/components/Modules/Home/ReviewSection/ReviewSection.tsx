@@ -11,7 +11,7 @@ const reviews = [
   {
     rating: 5,
     quote:
-      "“Fewer trips to the pharmacy and more reliable service than I was getting with my old pharmacy”",
+      "“Fewer trips to the pharmacy and more reliable service than I was getting with my old pharmacy.”",
     author: "Avita F, Amazon Pharmacy customer",
   },
   {
@@ -32,15 +32,23 @@ const reviews = [
       "“It is very easy to order my prescriptions and then receive them delivered to my home very quickly!”",
     author: "Eretrisen F, Amazon Pharmacy customer",
   },
+  {
+    rating: 5,
+    quote:
+      "“Fast, easy, and reliable service. I no longer have to worry about missing a refill!”",
+    author: "Jonathan P, Amazon Pharmacy customer",
+  },
+  {
+    rating: 5,
+    quote:
+      "“Amazon Pharmacy provides great customer service and always delivers my medication on time.”",
+    author: "Samantha R, Amazon Pharmacy customer",
+  },
 ];
-
 const ReviewSection = () => {
   return (
-    <section className="py-12 ">
+    <section className="py-10">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8">
-          What customers are saying
-        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {reviews.map((review, index) => (
             <Card key={index} className=" shadow-lg rounded-lg">

@@ -1,11 +1,11 @@
-"use server"
+"use server";
 
 import { cookies } from "next/headers";
 
 // only admin
-export const getAllUsers = async (
-  query?: { [key: string]: string | string[] | undefined },
-) => {
+export const getAllUsers = async (query?: {
+  [key: string]: string | string[] | undefined;
+}) => {
   try {
     const queryParams = new URLSearchParams();
 
@@ -24,12 +24,11 @@ export const getAllUsers = async (
 
     const url = `${process.env.NEXT_PUBLIC_BASE_API}/users?page=${query?.page}&${queryParams}&sort=${query?.sort}`;
 
-
     const res = await fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-         Authorization: (await cookies()).get("accessToken")!.value,
+        Authorization: (await cookies()).get("accessToken")!.value,
       },
       next: {
         tags: ["USERS"],
@@ -44,11 +43,7 @@ export const getAllUsers = async (
   }
 };
 
-
-
-
-
-// delete user 
+// delete user
 export const deleteUser = async (id: string) => {
   try {
     const url = `${process.env.NEXT_PUBLIC_BASE_API}/users/${id}`;
@@ -57,7 +52,32 @@ export const deleteUser = async (id: string) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-         Authorization: (await cookies()).get("accessToken")!.value,
+        Authorization: (await cookies()).get("accessToken")!.value,
+      },
+      next: {
+        tags: ["USERS"],
+      },
+    });
+
+    const data = await res.json();
+
+    return data;
+  } catch (error: any) {
+    console.error("API Error:", error.message);
+  }
+};
+
+// get user by id
+
+export const getUserById = async (id: string) => {
+  try {
+    const url = `${process.env.NEXT_PUBLIC_BASE_API}/users/${id}`;
+
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: (await cookies()).get("accessToken")!.value,
       },
       next: {
         tags: ["USERS"],

@@ -4,14 +4,13 @@ import { getDashboardReport, getMonthlyAnalytic } from "@/utils/actions/dashbora
 
 
 const DashboardHomePage = async () => {
-  const { meta:analytics  } = await getMonthlyAnalytic();
-  const { meta } = await getDashboardReport();
+  const { data:analytics  } = await getMonthlyAnalytic();
+  const { data } = await getDashboardReport();
 
 
-  console.log(meta)
   return (
     <div className="w-full text-center">
-      <Dashboard data={meta}/> 
+      <Dashboard data={data}/> 
       <DashboardHome monthly={analytics} />
     </div>
   );

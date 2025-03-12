@@ -17,8 +17,11 @@ import { loginUser } from "@/utils/actions/loginUser";
 import { useAppDispatch } from "@/redux/hooks";
 import { decodedToken } from "@/utils/decodedToken";
 import { setUser } from "@/redux/features/user/authSlice";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
+  const router = useRouter();
+
   const form = useForm({
     // resolver: zodResolver(loginValidationSchema),
     defaultValues: {
@@ -43,7 +46,10 @@ const LoginForm = () => {
         const user = decodedToken(res?.data?.accessToken);
 
         dispatch(setUser({ user: user, token: res?.data?.accessToken }));
+
         localStorage.setItem("accessToken", res?.data?.accessToken);
+
+        router.push("/");
       }
     } catch (error: any) {
       toast.error(error.message || "Something went wrong.");

@@ -1,4 +1,4 @@
-
+import About from "@/components/Modules/pages/About/About";
 import DemoBanner from "@/components/Modules/Shared/DemoBanner/DemoBanner";
 import TitleContainer from "@/components/Modules/Shared/TitleContainer/TitleContainer";
 
@@ -13,15 +13,11 @@ const AboutPage = () => {
   return (
     <div>
       <DemoBanner
-        title="Designed for Business Teams Like Yours"
-        description=" Here at Flowbite, we focus on markets where technology, innovation,
-          and capital can unlock long-term value and drive economic growth."
+        title=" About Us"
+        description="  We provide quality medicines with fast delivery and secure online payment options."
         breadcrumbs={breadcrumbs}
       />
-      <TitleContainer
-        title="About Us"
-        description="Here at Flowbite, we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth."
-      />
+      <About />
     </div>
   );
 };

@@ -1,17 +1,28 @@
 "use client";
 
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 
+interface IMonthly {
+  totalSales: number;
+  _id: number;
+}
 
+const DashboardHome = ({ monthly }: { monthly: IMonthly[] }) => {
 
-
-const DashboardHome = ({monthly}) => {
-
-    // Format the data for the chart
-const formattedData = monthly.map((item, index) => ({
-    month: `March ${index + 1}`, // Replace with actual month names if available
+  // Format the data for the chart
+  const formattedData = monthly.map((item, index) => ({
+    month: `March ${index + 1}`, 
     totalSales: item.totalSales,
   }));
+
+  
   return (
     <div className="p-4 bg-white rounded-xl shadow-md">
       <h2 className="text-lg font-semibold mb-4">Monthly Sales</h2>

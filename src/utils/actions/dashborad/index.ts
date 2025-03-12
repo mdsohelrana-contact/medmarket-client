@@ -1,3 +1,4 @@
+"use server"
 import { cookies } from "next/headers";
 
 export const getMonthlyAnalytic = async () => {
@@ -16,7 +17,7 @@ export const getMonthlyAnalytic = async () => {
 
     return data;
   } catch (error: any) {
-    console.error("API Error:", error.message);
+    console.log("API Error:", error.message);
   }
 };
 
@@ -32,6 +33,8 @@ export const getDashboardReport = async () => {
     });
 
     const data = await res.json();
+
+
 
     return data;
   } catch (error: any) {

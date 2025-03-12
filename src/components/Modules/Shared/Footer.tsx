@@ -27,6 +27,9 @@ const Footer = () => {
             <Link href="/contact" className="hover:text-gray-400">
               Contact
             </Link>
+            <Link href="/contact" className="hover:text-gray-400">
+              FAQ
+            </Link>
           </div>
 
           {/* Right Side: Email Subscription */}
@@ -81,7 +84,10 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="text-center border-t border-gray-700 pt-8">
           <p className="text-sm">
-            &copy; 2021-2022 Flowbite. All Rights Reserved.
+            &copy; {new Date().getFullYear()} RanaMedStore. All Rights Reserved.
+          </p>
+          <p className="text-sm mt-2">
+            Providing the best pharmaceutical products delivered to your door.
           </p>
         </div>
       </div>

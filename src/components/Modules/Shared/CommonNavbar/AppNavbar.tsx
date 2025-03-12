@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -10,12 +10,28 @@ import { Button } from "@/components/ui/button";
 import ThemeToggle from "../ThemeToggle";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { currentUser, logOut } from "@/redux/features/user/authSlice";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Image from "next/image";
+import { getUserById } from "@/utils/actions/user/userActions";
+import { UserProfile } from "../UserProfile/UserProfile";
+import { useRouter } from "next/navigation";
 
 const AppNavbar = () => {
+  const router = useRouter()
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const dispatch = useAppDispatch();
   const user = useAppSelector(currentUser);
+  const [userData, setUserData] = useState<IUser | null>(null);
+
+  // fetch current user information
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const {data} = await getUserById(user?.userId as string);
+      setUserData(data);
+    };
+
+    fetchUserData();
+  }, [user?.userId]);
+
 
   // Define base nav items
   const baseNavItems = [
@@ -50,7 +66,8 @@ const AppNavbar = () => {
   // Handle logout
   const handleLogout = () => {
     dispatch(logOut());
-    localStorage.removeItem("accessToken")
+    localStorage.removeItem("accessToken");
+    router.push("/login");
   };
 
   return (
@@ -78,7 +95,7 @@ const AppNavbar = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1 }}
               >
-                RANA
+                <Image width={50} height={50} src="./logo.svg" alt="logo" />
               </motion.div>
             </Link>
           </motion.div>
@@ -99,23 +116,18 @@ const AppNavbar = () => {
 
           {
             // User Dropdown Menu
-            user ? (
+            userData ? (
               <div className="flex items-center space-x-4">
-                {/* <Link href={`/user/${user.userId}`}> */}
                 <motion.div
                   className="flex items-center space-x-2 text-sm font-medium dark:text-white"
                   initial={{ opacity: 0, x: -100 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <Button onClick={handleLogout} size="sm" variant="outline">
-                    <Avatar className="h-8 w-8 rounded-lg">
-                      <AvatarImage src="" alt={user.role} />
-                      <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-                    </Avatar>
-                  </Button>
+                
+
+                  <UserProfile user={userData} logoutFn={handleLogout} />
                 </motion.div>
-                {/* </Link> */}
               </div>
             ) : (
               <div className="hidden md:flex">

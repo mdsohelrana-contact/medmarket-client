@@ -1,0 +1,35 @@
+/* Add this to your global CSS or a custom style module */
+@keyframes scroll-left-right {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.infinityLoopContainer {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+}
+
+.infinityLoop {
+  display: flex;
+  animation: scroll-left-right 20s linear infinite;
+  /* Make sure the animation runs normally by default */
+  animation-play-state: running;
+  transition: animation-play-state 0.3s ease; /* Smooth transition when hover */
+}
+
+.infinityLoop:hover {
+  /* When hovered, pause the animation */
+  animation-play-state: paused;
+}
+
+.infinityLoop div {
+  margin-right: 40px;
+  font-size: 1.125rem; /* text-lg */
+  font-weight: 600;   /* font-semibold */
+  white-space: nowrap;
+}

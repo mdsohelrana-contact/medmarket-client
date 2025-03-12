@@ -11,11 +11,19 @@ import { Input } from "@/components/ui/input";
 import ProductCard from "../../Shared/Product/ProductCard";
 import { IMedicine } from "@/types/medicinesTypes";
 import { usePathname, useRouter } from "next/navigation";
+import { IMeta } from "@/types/orderTypes";
 
-const ShopHome = ({ medicines }: { medicines: IMedicine[] }) => {
+const ShopHome = ({
+  medicines,
+  meta,
+}: {
+  medicines: IMedicine[];
+  meta: IMeta;
+}) => {
   const router = useRouter();
   const pathname = usePathname();
 
+  console.log(meta)
 
   const [filters, setFilters] = useState({
     search: "",
@@ -56,14 +64,12 @@ const ShopHome = ({ medicines }: { medicines: IMedicine[] }) => {
     setFilteredMedicines(updatedMedicines);
   }, [filters, medicines]);
 
-
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchTerm = e.target.value;
     setFilters({ ...filters, search: searchTerm });
     // Update the URL with the new search term
     router.push(`${pathname}?search=${searchTerm}`);
   };
-
 
   return (
     <div className="container mx-auto p-6">

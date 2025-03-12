@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" width="60" height="60">
+  <!-- Background Circle -->
+  <circle cx="30" cy="30" r="28" fill="#28a745" stroke="#1e7e34" stroke-width="2" />
+  
+  <!-- Cross (symbolizing healthcare) -->
+  <rect x="22" y="12" width="16" height="36" rx="3" fill="#ffffff" />
+  <rect x="12" y="22" width="36" height="16" rx="3" fill="#ffffff" />
+  
+  <!-- Pill Icon -->
+  <ellipse cx="30" cy="30" rx="12" ry="6" fill="#ffffff" opacity="0.7" />
+  <ellipse cx="30" cy="30" rx="9" ry="4" fill="#007bff" opacity="0.7" />
+</svg>

@@ -33,12 +33,12 @@ const ProductCard = ({ medicine }: { medicine: IMedicine }) => {
       <Card className="p-4 rounded-xl shadow-lg">
         {/* Product Image */}
         <div className="  rounded-lg flex items-center justify-center">
-          <Image
+          {/* <Image
             src={medicine?.imageUrl}
             width={300}
             height={200}
             alt={medicine?.name}
-          />
+          /> */}
         </div>
 
         <CardContent className="mt-4">

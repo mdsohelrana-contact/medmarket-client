@@ -1,3 +1,4 @@
+import Contact from "@/components/Modules/pages/Contact/Contact";
 import DemoBanner from "@/components/Modules/Shared/DemoBanner/DemoBanner";
 import TitleContainer from "@/components/Modules/Shared/TitleContainer/TitleContainer";
 
@@ -5,18 +6,15 @@ const ContactPage = () => {
   return (
     <div>
       <DemoBanner
-        title="Welcome to Our Platform"
-        description="We are here to assist you with all your needs. Get in touch with us today!"
+        title="Contact Us"
+        description="We’re here to help. Reach out to us for any inquiries or support."
         imagePath="/images/contact-bg.jpg"
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Contact Us", href: "/contact" },
         ]}
       />
-      <TitleContainer
-        title="Contact Us"
-        description="We are here to assist you with all your needs. Get in touch with us today!"
-      />
+     <Contact/>
     </div>
   );
 };

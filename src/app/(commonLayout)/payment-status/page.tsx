@@ -10,7 +10,7 @@ const SuccessPage = () => {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id");
   const [paymentStatus, setPaymentStatus] = useState(null);
-  const [orderDetails, setOrderDetails] = useState(null);
+  const [orderDetails, setOrderDetails] = useState<{ data: any } | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
