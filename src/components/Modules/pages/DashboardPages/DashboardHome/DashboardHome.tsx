@@ -15,25 +15,27 @@ interface IMonthly {
 }
 
 const DashboardHome = ({ monthly }: { monthly: IMonthly[] }) => {
-
   // Format the data for the chart
-  const formattedData = monthly.map((item, index) => ({
-    month: `March ${index + 1}`, 
-    totalSales: item.totalSales,
+  const formattedData = monthly?.map((item, index) => ({
+    month: `March ${index + 1}`,
+    totalSales: item.totalSales || 0,
   }));
 
-  
   return (
-    <div className="p-4 bg-white rounded-xl shadow-md">
+    <div className="p-4 border border-gray-200 rounded-xl">
       <h2 className="text-lg font-semibold mb-4">Monthly Sales</h2>
-      <ResponsiveContainer width="100%" height={300}>
-        <BarChart data={formattedData}>
-          <XAxis dataKey="month" />
-          <YAxis />
-          <Tooltip />
-          <Bar dataKey="totalSales" fill="#3b82f6" radius={[5, 5, 0, 0]} />
-        </BarChart>
-      </ResponsiveContainer>
+      {formattedData?.length > 0 ? (
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart data={formattedData}>
+            <XAxis dataKey="month" />
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey="totalSales" fill="#3b82f6" radius={[5, 5, 0, 0]} />
+          </BarChart>
+        </ResponsiveContainer>
+      ) : (
+        <p className="text-gray-500">No sales data available.</p>
+      )}
     </div>
   );
 };

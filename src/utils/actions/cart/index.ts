@@ -11,8 +11,8 @@ export const addToCart = async (data: any) => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/cart`, {
       method: "POST",
       headers: {
+        authorization: (await cookies()).get("accessToken")!.value,
         "Content-Type": "application/json",
-        Authorization: (await cookies())?.get("accessToken")!.value,
       },
       body: JSON.stringify(data),
     });
@@ -32,8 +32,7 @@ export const getCartItems = async () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/carts`, {
       method: "GET",
       headers: {
-        Authorization: (await cookies()).get("accessToken")!.value,
-        // Authorization: token!,
+        authorization: (await cookies()).get("accessToken")!.value,
       },
       next: {
         tags: ["CARTS"],
@@ -52,8 +51,8 @@ export const updateQuantityCartItem = async (data: any) => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/cart`, {
       method: "PUT",
       headers: {
+        authorization: (await cookies()).get("accessToken")!.value,
         "Content-Type": "application/json",
-        Authorization: (await cookies()).get("accessToken")!.value,
       },
       body: JSON.stringify(data),
     });
@@ -71,7 +70,7 @@ export const clearCart = async () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/cart`, {
       method: "DELETE",
       headers: {
-        Authorization: (await cookies()).get("accessToken")!.value,
+        authorization: (await cookies()).get("accessToken")!.value,
       },
     });
     revalidateTag("CARTS");
@@ -91,7 +90,7 @@ export const deleteCartItem = async (medicineId: string) => {
       {
         method: "DELETE",
         headers: {
-          Authorization: (await cookies()).get("accessToken")!.value,
+          authorization: (await cookies()).get("accessToken")!.value,
         },
       }
     );

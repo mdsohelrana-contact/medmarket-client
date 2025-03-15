@@ -6,7 +6,7 @@ export interface IMedicine {
   createdAt: string;
   dosage_form: string[];
   generic_name: string;
-  imageUrl: string;
+  imageUrl: string[];
   prescription_required: boolean;
   price: number;
   stock: number;

@@ -1,4 +1,5 @@
-import { TUser } from "@/types/userTypes";
+
+import { TUser } from "@/redux/features/user/authSlice";
 import { jwtDecode } from "jwt-decode";
 
 export const decodedToken = (token?: string): TUser | null => {

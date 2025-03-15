@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import {useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import ProductDetails from "@/components/Modules/Shared/Product/ProductDetails";
 import { getSingleProduct } from "@/utils/actions/products";
@@ -9,9 +9,11 @@ import { Skeleton } from "@/components/ui/skeleton";
 const MedicineDetails = () => {
   const { medicineId } = useParams();
   const [medicineData, setMedicineData] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true); //
+  const [isLoading, setIsLoading] = useState<boolean>(true); 
 
-  useEffect(() => {
+
+  useEffect( () => {
+
     const fetchData = async () => {
       const data = await getSingleProduct(medicineId as string);
       setMedicineData(data);

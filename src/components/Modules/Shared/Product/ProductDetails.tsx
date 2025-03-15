@@ -28,7 +28,7 @@ const ProductDetails = ({ medicineData }: { medicineData: IMedicine }) => {
     medicineData?.strength[0]
   );
   const [selectedDosageForm, setSelectedDosageForm] = useState(
-    medicineData.dosage_form[0]
+    medicineData?.dosage_form[0]
   );
 
   // Handle Quantity Change
@@ -48,10 +48,17 @@ const ProductDetails = ({ medicineData }: { medicineData: IMedicine }) => {
 
     const id = toast.loading("Adding to Cart...");
 
-    if (medicine?.prescription_required && Array.isArray(prescription) && prescription.length === 0) {
-      return toast.warning("Please upload a valid prescription to add to cart.", {
-        id: id,
-      });
+    if (
+      medicine?.prescription_required &&
+      Array.isArray(prescription) &&
+      prescription.length === 0
+    ) {
+      return toast.warning(
+        "Please upload a valid prescription to add to cart.",
+        {
+          id: id,
+        }
+      );
     }
 
     const uploadedImageUrl = await uploadImagesToCloudinary(
@@ -75,9 +82,8 @@ const ProductDetails = ({ medicineData }: { medicineData: IMedicine }) => {
       if (response?.success) {
         toast.success("Added to Cart Successfully", { id: id });
       } else {
-        toast.error(response.message ||"Error adding to cart");
+        toast.error(response.message || "Error adding to cart");
       }
-
     } catch (error) {
       toast.error("Error adding to cart");
     }
@@ -85,7 +91,11 @@ const ProductDetails = ({ medicineData }: { medicineData: IMedicine }) => {
 
   // Handle Buy Now with Prescription Upload
   const handleBuyNow = async () => {
-    if (medicine.prescription_required && Array.isArray(prescription) && prescription.length === 0) {
+    if (
+      medicine.prescription_required &&
+      Array.isArray(prescription) &&
+      prescription.length === 0
+    ) {
       toast.warning("Please upload a valid prescription to proceed.");
       return;
     }
@@ -108,9 +118,7 @@ const ProductDetails = ({ medicineData }: { medicineData: IMedicine }) => {
       ],
     };
 
-
     const res = await createCheckout(orderData);
-
 
     if (res.success && res?.data?.redirectUrl) {
       toast.success("Processing for Purchase...");
@@ -134,12 +142,17 @@ const ProductDetails = ({ medicineData }: { medicineData: IMedicine }) => {
           <CardContent className="space-y-6">
             {/* Image Section */}
             <div className="flex justify-center">
-              <Image
-                src={medicine?.imageUrl}
-                alt={medicine?.name}
-                width={500}
-                height={300}
-              />
+              {medicine?.imageUrl &&
+                medicine?.imageUrl.map((image) => (
+                  <Image
+                    src={image}
+                    layout="responsive"
+                    width={700}
+                    height={500}
+                    alt={medicine?.name}
+                    className="rounded-lg w-full"
+                  />
+                ))}
             </div>
 
             <Separator />
@@ -235,9 +248,7 @@ const ProductDetails = ({ medicineData }: { medicineData: IMedicine }) => {
                     variant="outline"
                     size="icon"
                     onClick={decreaseQuantity}
-                    disabled={
-                      quantity === 1
-                    }
+                    disabled={quantity === 1}
                   >
                     <Minus className="w-6 h-6" />
                   </Button>
@@ -251,9 +262,7 @@ const ProductDetails = ({ medicineData }: { medicineData: IMedicine }) => {
                     variant="outline"
                     size="icon"
                     onClick={increaseQuantity}
-                    disabled={
-                      quantity >= medicine?.stock
-                    }
+                    disabled={quantity >= medicine?.stock}
                   >
                     <Plus className="w-6 h-6" />
                   </Button>

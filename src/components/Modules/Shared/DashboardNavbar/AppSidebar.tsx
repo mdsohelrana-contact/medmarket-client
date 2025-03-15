@@ -69,8 +69,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   // fetch current user information
   React.useEffect(() => {
     const fetchUserData = async () => {
-      const { data } = await getUserById(user?.userId as string);
-      setUserData(data);
+      const  data = await getUserById(user?.userId as string);
+      setUserData(data?.data);
     };
 
     fetchUserData();
@@ -80,7 +80,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const handleLogout = () => {
     dispatch(logOut());
     localStorage.removeItem("accessToken");
-    router.push("/login");
+    router.push("/");
   };
 
   return (

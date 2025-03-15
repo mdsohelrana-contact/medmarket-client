@@ -25,6 +25,8 @@ const AllOrdersTable = ({
 }) => {
   const router = useRouter();
 
+  console.log(orders)
+
 
   // Function to update order intent
   const handleUpdateIntent = async (orderId: string, newIntent: string) => {

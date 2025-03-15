@@ -11,8 +11,8 @@ export const createCheckout = async (data: any) => {
       {
         method: "POST",
         headers: {
+          authorization: (await cookies()).get("accessToken")!.value,
           "Content-Type": "application/json",
-          Authorization: (await cookies()).get("accessToken")!.value,
         },
         body: JSON.stringify(data),
       }
@@ -37,8 +37,8 @@ export const checkPaymentStatus = async (sessionId: any) => {
       {
         method: "POST",
         headers: {
+          authorization: (await cookies()).get("accessToken")!.value,
           "Content-Type": "application/json",
-          Authorization: (await cookies()).get("accessToken")!.value,
         },
         body: JSON.stringify(sessionId),
       }
@@ -60,7 +60,7 @@ export const getOrderData = async (orderId: any) => {
       {
         method: "GET",
         headers: {
-          Authorization: (await cookies()).get("accessToken")!.value,
+          authorization: (await cookies()).get("accessToken")!.value,
         },
       }
     );

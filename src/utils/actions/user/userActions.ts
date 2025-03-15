@@ -24,11 +24,13 @@ export const getAllUsers = async (query?: {
 
     const url = `${process.env.NEXT_PUBLIC_BASE_API}/users?page=${query?.page}&${queryParams}&sort=${query?.sort}`;
 
+    // const token = (await cookies()).get("accessToken")?.value || "";
+
     const res = await fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: (await cookies()).get("accessToken")!.value,
+        Authorization: (await cookies()).get("accessToken")?.value || "",
       },
       next: {
         tags: ["USERS"],
@@ -52,7 +54,7 @@ export const deleteUser = async (id: string) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        Authorization: (await cookies()).get("accessToken")!.value,
+        Authorization: (await cookies()).get("accessToken")?.value || "",
       },
       next: {
         tags: ["USERS"],
@@ -77,7 +79,7 @@ export const getUserById = async (id: string) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: (await cookies()).get("accessToken")!.value,
+        authorization:(await cookies()).get("accessToken")!.value,
       },
       next: {
         tags: ["USERS"],

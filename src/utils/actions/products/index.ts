@@ -3,9 +3,9 @@
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
-export const getAllProducts = async (
-  query?: { [key: string]: string | string[] | undefined },
-) => {
+export const getAllProducts = async (query?: {
+  [key: string]: string | string[] | undefined;
+}) => {
   try {
     const queryParams = new URLSearchParams();
 
@@ -23,7 +23,6 @@ export const getAllProducts = async (
     }
 
     const url = `${process.env.NEXT_PUBLIC_BASE_API}/medicines?page=${query?.page}&${queryParams}&sort=${query?.sort}`;
-
 
     const res = await fetch(url, {
       method: "GET",
@@ -46,6 +45,10 @@ export const getAllProducts = async (
 // get single product
 export const getSingleProduct = async (medicineId: string) => {
   try {
+
+
+
+
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_API}/medicine/${medicineId}`,
       {
@@ -67,8 +70,8 @@ export const addMedicine = async (medicineData: any): Promise<any> => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/medicine`, {
       method: "POST",
       headers: {
+        authorization: (await cookies()).get("accessToken")!.value,
         "Content-Type": "application/json",
-        Authorization: (await cookies()).get("accessToken")!.value,
       },
       body: JSON.stringify(medicineData),
     });
@@ -93,8 +96,8 @@ export const updateMedicine = async (
       {
         method: "PUT",
         headers: {
+          authorization: (await cookies()).get("accessToken")!.value,
           "Content-Type": "application/json",
-          Authorization: (await cookies()).get("accessToken")!.value,
         },
         body: JSON.stringify(productData),
       }
@@ -103,7 +106,7 @@ export const updateMedicine = async (
 
     const data = await res.json();
 
-    console.log(data,"data from server")
+    console.log(data, "data from server");
 
     return data;
   } catch (error: any) {
@@ -119,7 +122,7 @@ export const removeMedicine = async (medicineId: string) => {
       {
         method: "DELETE",
         headers: {
-          Authorization: (await cookies()).get("accessToken")!.value,
+          authorization: (await cookies()).get("accessToken")!.value,
         },
       }
     );

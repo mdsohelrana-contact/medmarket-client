@@ -24,10 +24,10 @@ const LoginForm = () => {
 
   const form = useForm({
     // resolver: zodResolver(loginValidationSchema),
-    defaultValues: {
-      email: "admin33@gmail.com",
-      password: "000000",
-    },
+    // defaultValues: {
+    //   email: "admin33@gmail.com",
+    //   password: "000000",
+    // },
   });
   const dispatch = useAppDispatch();
 
@@ -35,7 +35,6 @@ const LoginForm = () => {
     try {
       const res = await loginUser(data);
 
-      console.log(res);
 
       if (!res?.data?.accessToken) {
         toast.error(res.message);

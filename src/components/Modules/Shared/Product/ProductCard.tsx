@@ -28,17 +28,23 @@ const ProductCard = ({ medicine }: { medicine: IMedicine }) => {
     }
   };
 
+
   return (
     <>
       <Card className="p-4 rounded-xl shadow-lg">
         {/* Product Image */}
         <div className="  rounded-lg flex items-center justify-center">
-          {/* <Image
-            src={medicine?.imageUrl}
-            width={300}
-            height={200}
-            alt={medicine?.name}
-          /> */}
+          {medicine?.imageUrl &&
+            medicine?.imageUrl.map((image,index) => (
+              <Image
+                src={image}
+                key={index}
+                width={300}
+                height={200}
+                alt={medicine?.name}
+                className="rounded-lg"
+              />
+            ))}
         </div>
 
         <CardContent className="mt-4">

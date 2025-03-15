@@ -1,14 +1,16 @@
 "use server"
+
 import { cookies } from "next/headers";
 
 export const getMonthlyAnalytic = async () => {
   try {
+
     const url = `${process.env.NEXT_PUBLIC_BASE_API}/monthly-sales/analytics`;
 
     const res = await fetch(url, {
       method: "GET",
       headers: {
-        Authorization: (await cookies()).get("accessToken")!.value,
+        authorization: (await cookies()).get("accessToken")!.value,
       },
      
     });
@@ -28,7 +30,7 @@ export const getDashboardReport = async () => {
     const res = await fetch(url, {
       method: "GET",
       headers: {
-        Authorization: (await cookies()).get("accessToken")!.value,
+        authorization: (await cookies()).get("accessToken")!.value,
       },
     });
 

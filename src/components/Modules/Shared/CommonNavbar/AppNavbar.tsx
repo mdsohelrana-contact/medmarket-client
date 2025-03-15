@@ -16,7 +16,7 @@ import { UserProfile } from "../UserProfile/UserProfile";
 import { useRouter } from "next/navigation";
 
 const AppNavbar = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const dispatch = useAppDispatch();
   const user = useAppSelector(currentUser);
@@ -25,13 +25,13 @@ const AppNavbar = () => {
   // fetch current user information
   useEffect(() => {
     const fetchUserData = async () => {
-      const {data} = await getUserById(user?.userId as string);
-      setUserData(data);
+      const data = await getUserById(user?.userId as string);
+
+      setUserData(data?.data);
     };
 
     fetchUserData();
   }, [user?.userId]);
-
 
   // Define base nav items
   const baseNavItems = [
@@ -67,7 +67,9 @@ const AppNavbar = () => {
   const handleLogout = () => {
     dispatch(logOut());
     localStorage.removeItem("accessToken");
-    router.push("/login");
+    document.cookie =
+      "accessToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+    router.push("/");
   };
 
   return (
@@ -124,8 +126,6 @@ const AppNavbar = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5 }}
                 >
-                
-
                   <UserProfile user={userData} logoutFn={handleLogout} />
                 </motion.div>
               </div>
