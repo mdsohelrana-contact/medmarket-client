@@ -16,6 +16,7 @@
 
 .infinityLoop {
   display: flex;
+  justify-content: center;
   animation: scroll-left-right 20s linear infinite;
   /* Make sure the animation runs normally by default */
   animation-play-state: running;
@@ -28,7 +29,7 @@
 }
 
 .infinityLoop div {
-  margin-right: 40px;
+  margin-right: 10px;
   font-size: 1.125rem; /* text-lg */
   font-weight: 600;   /* font-semibold */
   white-space: nowrap;

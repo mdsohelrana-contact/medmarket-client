@@ -13,7 +13,7 @@ import Link from "next/link";
 const Home = ({ medicines }: { medicines: IMedicine[] }) => {
   return (
     <div className="my-7 px-4  lg:px-8">
-      <BrandingSection />
+    <Banner/>
 
       <div className="mt-7">
         <TitleContainer

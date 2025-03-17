@@ -7,7 +7,6 @@ import { getOrdersByUserId } from "@/utils/actions/orders";
 const OrderHistoryPage = async () => {
   const { data: ordersHistory } = await getOrdersByUserId();
 
-  console.log("order history", ordersHistory);
 
   return (
     <div className="my-10">
@@ -16,12 +15,13 @@ const OrderHistoryPage = async () => {
         description="
       Your orders description 
       "
+      imagePath="/images/orders2.jpg"
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Orders", href: "/orders" },
         ]}
       />
-      <OrderHistory orders={ordersHistory} />
+      <OrderHistory orders={ordersHistory || null} />
     </div>
   );
 };

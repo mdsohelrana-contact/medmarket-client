@@ -71,7 +71,7 @@ const ProductDetails = ({ medicineData }: { medicineData: IMedicine }) => {
         medicineId: medicineData._id,
         quantity: quantity,
         medicineInfo: {
-          strength: selectedDosageForm,
+          strength: selectedStrength,
           dosageForm: selectedDosageForm,
           prescription: uploadedImageUrl,
         },
@@ -119,6 +119,8 @@ const ProductDetails = ({ medicineData }: { medicineData: IMedicine }) => {
     };
 
     const res = await createCheckout(orderData);
+
+    console.log(res)
 
     if (res.success && res?.data?.redirectUrl) {
       toast.success("Processing for Purchase...");

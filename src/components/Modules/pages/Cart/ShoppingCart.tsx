@@ -73,8 +73,8 @@ const ShoppingCart = ({ cart }: { cart: TCart | null }) => {
   };
 
   return (
-    <div className="min-h-screen p-6 flex justify-center items-center">
-      {cart ? (
+    <div className="min-h-screen p-6 flex justify-center items-center ">
+      {cart && cart?.items?.length >0 ? (
         <Card className="w-full max-w-5xl shadow-xl p-6 rounded-lg">
           <CardHeader className="text-center text-3xl font-bold p-4">
             Shopping Cart

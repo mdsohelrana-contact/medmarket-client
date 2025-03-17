@@ -19,7 +19,10 @@ export const createCheckout = async (data: any) => {
     );
 
     revalidateTag("CART");
+
     const cartData = await res.json();
+
+    console.log(cartData,"from server")
 
     return cartData;
   } catch (error: any) {

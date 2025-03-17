@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-import { CrossIcon, Icon, MenuIcon, Package, ShoppingCart } from "lucide-react";
+import { CrossIcon, Icon, LucideListOrdered, MenuIcon, Package, ShoppingCart } from "lucide-react";
 import ActiveNavLink from "./ActiveNavLink";
 // import { navItems } from "./navItems";
 import { Button } from "@/components/ui/button";
@@ -51,7 +51,7 @@ const AppNavbar = () => {
       return [
         ...baseNavItems,
         { label: <ShoppingCart className="w-5 h-5" />, href: "/cart" },
-        { label: <Package className="w-5 h-5" />, href: "/orders" },
+        { label: "Orders", href: "/orders" },
       ];
     }
 
@@ -103,7 +103,7 @@ const AppNavbar = () => {
           </motion.div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-3">
+          <div className="hidden md:flex space-x-1">
             {navItems?.map((navItem, index) => (
               <ActiveNavLink
                 key={index}

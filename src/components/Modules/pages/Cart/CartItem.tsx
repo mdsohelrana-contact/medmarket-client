@@ -3,14 +3,19 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { IMedicine } from "@/types/medicinesTypes";
-
-import { Minus, Plus, SaveIcon, Trash2 } from "lucide-react";
+import { Minus, Plus, Trash2 } from "lucide-react";
 import { useState } from "react";
+import Image from "next/image";
 
 type CartItemProps = {
   item: {
     medicineId: IMedicine;
     quantity: number;
+    medicineInfo: {
+      dosageForm: string;
+      prescription: string;
+      strength: string;
+    };
   };
   updateQuantity: (id: string, quantity: number) => void;
   removeItem: (id: string) => void;
@@ -23,29 +28,51 @@ export const CartItem = ({
 }: CartItemProps) => {
   const [quantity, setQuantity] = useState(item.quantity);
 
+
   const handleUpdateQuantity = (newQuantity: number) => {
     if (newQuantity < 1) return;
     setQuantity(newQuantity);
   };
 
-  // handle update
   const handleUpdate = (id: string) => {
     const cartItem = {
       medicineId: item.medicineId._id,
       quantity: quantity,
     };
 
-    console.log(cartItem)
-
     updateQuantity(id, quantity);
   };
 
+  const imageUrl = item?.medicineInfo?.prescription;
+
   return (
     <>
-      <div className="flex flex-wrap md:flex-nowrap justify-between items-center px-2 md:px-6">
-        <span className="flex-1 font-medium text-lg truncate">
-          {item?.medicineId?.name}
-        </span>
+      <div className="flex flex-col md:flex-row justify-between items-center p-4 gap-4">
+        <div className="flex items-center gap-4 justify-between flex-1">
+          <div className="w-16 h-16 relative">
+            {item?.medicineInfo?.prescription === "" ? (
+              <p className="text-gray-400 font-semibold">Prescription not required</p>
+            ) : (
+              <Image
+                src={imageUrl}
+                alt={item.medicineId.name}
+                layout="fill"
+                objectFit="cover"
+                className="rounded-lg"
+              />
+            )}
+          </div>
+          <div className="font-medium text-lg truncate">
+            {item?.medicineId?.name}
+          </div>
+
+          <div className="font-medium text-lg ">
+            <p>{item?.medicineInfo?.dosageForm}</p>
+
+            <p>{item?.medicineInfo?.strength}</p>
+          </div>
+        </div>
+
         <div className="flex items-center gap-2">
           <Button
             variant="outline"
@@ -54,8 +81,6 @@ export const CartItem = ({
           >
             <Minus className="w-4 h-4" />
           </Button>
-          {/* <span className="w-6 text-center text-lg">{item?.quantity}</span> */}
-
           <Input
             min={1}
             className="w-14 text-center"
@@ -71,9 +96,11 @@ export const CartItem = ({
             <Plus className="w-4 h-4" />
           </Button>
         </div>
-        <span className="w-20 text-right text-lg font-semibold">
+
+        <span className="w-20 text-center text-lg font-semibold">
           ${quantity * item?.medicineId?.price}
         </span>
+
         <Button
           variant="ghost"
           size="icon"

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -8,11 +8,35 @@ import { usePathname, useRouter } from "next/navigation";
 
 import styles from "./BrandingSection.module.css";
 import TitleContainer from "../../Shared/TitleContainer/TitleContainer";
+import Image from "next/image";
 
 export default function BrandingSection() {
   const router = useRouter();
   const pathname = usePathname();
-  
+
+  const brands = [
+    { name: "GSK", logo: "https://i.ibb.co.com/wZrG2302/pngwing-com-2.png" },
+    {
+      name: "Merck",
+      logo: "https://i.ibb.co.com/j9Z688nJ/62cd6d6d55d69259cb08dc53624ab35c.png",
+    },
+    // {
+    //   name: "Roche",
+    //   logo: "https://i.ibb.co.com/HL32kRhg/kisspng-roche-diagnostics-roche-holding-ag-blood-glucose-m-pharma-5acfb9296b3c97-1203857115235627934.pn",
+    // },
+
+    { name: "Pfizer", logo: "https://i.ibb.co.com/v4bJWR2k/pngwing-com-3.png" },
+    {
+      name: "Novartis",
+      logo: "https://i.ibb.co.com/C55Hs8FP/pngwing-com-4.png",
+    },
+    {
+      name: "AstraZeneca",
+      logo: "https://i.ibb.co.com/6c7R3js2/pngwing-com-5.png",
+    },
+    { name: "Sanofi", logo: "https://i.ibb.co.com/ksqGzHpB/pngwing-com-6.png" },
+  ];
+
   // State to hold search parameters
   const [searchParams, setSearchParams] = useState({
     name: "",
@@ -41,49 +65,22 @@ export default function BrandingSection() {
   return (
     <section>
       <div
-        className={`${styles.container} relative w-full py-20 text-center border rounded-lg`}
+        className={`${styles.container} relative w-full py-20 text-center g`}
       >
-        <div className="max-w-3xl mx-auto px-6">
-          <TitleContainer
-            title="Discover the Perfect Medicine for You"
-            description="Effortlessly search for medicines by name, category, or symptoms with our powerful search tool."
-          />
-
-          <Card className="max-w-3xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-            <CardContent className="flex items-center gap-4 py-4">
-              <Input
-                name="name"
-                type="text"
-                placeholder="Search by name..."
-                className="w-full text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
-                onChange={handleSearchChange}
-                value={searchParams.name}
-              />
-              <Button
-                className="bg-blue-600 text-white hover:bg-blue-700 transition duration-200 ease-in-out py-3 px-6 rounded-lg flex items-center"
-                onClick={() => {
-                  const query = new URLSearchParams(searchParams).toString();
-                  router.push(`${pathname}?${query}`);
-                }}
-              >
-                <Search className="w-5 h-5 mr-3" />
-                Search
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
 
         {/* Brand Infinity Slide */}
         <div
-          className={`absolute bottom-0 left-0 w-full py-4 ${styles.infinityLoopContainer}`}
+          className={`absolute bottom-0  left-0 w-full py-4 ${styles.infinityLoopContainer}`}
         >
           <div className={styles.infinityLoop}>
-            <div>Brand 1</div>
-            <div>Brand 2</div>
-            <div>Brand 3</div>
-            <div>Brand 4</div>
-            <div>Brand 5</div>
-            {/* Add more brand names as necessary */}
+          {brands.map((brand, index) => (
+                <Image
+                  src={brand.logo}
+                  alt={brand.name}
+                  width={100}
+                  height={80}
+                />
+            ))}
           </div>
         </div>
       </div>

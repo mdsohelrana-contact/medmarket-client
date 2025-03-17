@@ -11,7 +11,7 @@ const AboutPage = () => {
   ];
 
   return (
-    <div>
+    <div className="my-14">
       <DemoBanner
         title=" About Us"
         description="  We provide quality medicines with fast delivery and secure online payment options."

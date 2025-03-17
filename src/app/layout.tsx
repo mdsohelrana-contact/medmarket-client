@@ -3,6 +3,7 @@ import { Montserrat, Open_Sans } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Modules/Providers/Providers";
 import { Toaster } from "@/components/ui/sonner"
+import Head from "next/head";
 // Title font (Montserrat)
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -48,6 +49,9 @@ const RootLayout = ({
       <body
         className={`${montserrat.variable} ${openSans.variable} antialiased`}
       >
+          <Head>
+          <link rel="icon" href="./favicon.ico" />
+        </Head>
         <Providers>
           <div className="">
             <div className="min-h-screen">{children}

@@ -4,7 +4,7 @@ import TitleContainer from "@/components/Modules/Shared/TitleContainer/TitleCont
 
 const ContactPage = () => {
   return (
-    <div>
+    <div className="my-14">
       <DemoBanner
         title="Contact Us"
         description="We’re here to help. Reach out to us for any inquiries or support."

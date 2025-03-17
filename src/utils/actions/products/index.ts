@@ -38,17 +38,13 @@ export const getAllProducts = async (query?: {
 
     return data;
   } catch (error: any) {
-    console.error("API Error:", error.message);
+    console.log("API Error:", error.message);
   }
 };
 
 // get single product
 export const getSingleProduct = async (medicineId: string) => {
   try {
-
-
-
-
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_API}/medicine/${medicineId}`,
       {

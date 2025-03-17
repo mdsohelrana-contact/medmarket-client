@@ -10,7 +10,6 @@ const useImageUploader = () => {
     const files = Array.isArray(selectedFiles) ? selectedFiles : [selectedFiles];
 
     if (!selectedFiles || files.length === 0) {
-      toast.error("No images selected.");
       return multiple ? [] : "";
     }
 

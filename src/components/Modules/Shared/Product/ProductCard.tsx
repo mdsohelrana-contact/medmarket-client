@@ -1,7 +1,14 @@
 "use client";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Eye, Heart, Truck, BadgeDollarSign } from "lucide-react";
+import {
+  ShoppingCart,
+  Eye,
+  Heart,
+  Truck,
+  BadgeDollarSign,
+  EyeIcon,
+} from "lucide-react";
 import { IMedicine } from "@/types/medicinesTypes";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,14 +35,13 @@ const ProductCard = ({ medicine }: { medicine: IMedicine }) => {
     }
   };
 
-
   return (
     <>
       <Card className="p-4 rounded-xl shadow-lg">
         {/* Product Image */}
         <div className="  rounded-lg flex items-center justify-center">
           {medicine?.imageUrl &&
-            medicine?.imageUrl.map((image,index) => (
+            medicine?.imageUrl.map((image, index) => (
               <Image
                 src={image}
                 key={index}
@@ -48,47 +54,47 @@ const ProductCard = ({ medicine }: { medicine: IMedicine }) => {
         </div>
 
         <CardContent className="mt-4">
-          <Link href={`/shop/${medicine?._id}`}>
-            {/* Discount Badge */}
-            <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded-lg">
-              Up to 35% off
-            </span>
+          {/* Discount Badge */}
+          <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded-lg">
+            Up to 35% off
+          </span>
 
-            {/* Product Title */}
-            <h2 className="mt-2 text-lg font-semibold">{medicine?.name}</h2>
+          {/* Product Title */}
+          <h2 className="mt-2 text-lg font-semibold">{medicine?.name}</h2>
 
-            {/* Rating */}
-            <div className="flex items-center space-x-1 mt-2">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <span key={i} className="text-yellow-400 text-sm">
-                  ★
-                </span>
-              ))}
-              <span className="text-sm ml-1">5.0 (455)</span>
+          {/* Rating */}
+          <div className="flex items-center space-x-1 mt-2">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <span key={i} className="text-yellow-400 text-sm">
+                ★
+              </span>
+            ))}
+            <span className="text-sm ml-1">5.0 (455)</span>
+          </div>
+
+          {/* Delivery & Price Badge */}
+          <div className="flex items-center gap-2 text-sm mt-2 ">
+            <div className="flex items-center">
+              <Truck className="w-4 h-4 mr-1" /> Fast Delivery
             </div>
-
-            {/* Delivery & Price Badge */}
-            <div className="flex items-center gap-2 text-sm mt-2 ">
-              <div className="flex items-center">
-                <Truck className="w-4 h-4 mr-1" /> Fast Delivery
-              </div>
-              <div className="flex items-center">
-                <BadgeDollarSign className="w-4 h-4 mr-1" /> Best Price
-              </div>
+            <div className="flex items-center">
+              <BadgeDollarSign className="w-4 h-4 mr-1" /> Best Price
             </div>
-          </Link>
+          </div>
 
           {/* Price & Add to Cart */}
           <div className="flex items-center justify-between mt-4">
             <span className="text-2xl font-bold">${medicine?.price}</span>
-            <Button
-              onClick={handleAddToCart}
-              variant={"default"}
-              className=" flex items-center space-x-2"
-            >
-              <ShoppingCart className="w-5 h-5" />
-              <span>Add to cart</span>
-            </Button>
+            <Link href={`/shop/${medicine?._id}`}>
+              <Button
+                onClick={handleAddToCart}
+                variant={"default"}
+                className=" flex items-center space-x-2"
+              >
+                <EyeIcon className="w-5 h-5" />
+                <span>View Details</span>
+              </Button>
+            </Link>
           </div>
         </CardContent>
       </Card>

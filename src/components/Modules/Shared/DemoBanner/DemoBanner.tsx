@@ -24,10 +24,12 @@ const DemoBanner = ({
   const currentPath = usePathname();
   return (
     <div
-      className="relative flex items-center justify-center h-[400px] md:h-[500px] lg:h-[600px] bg-cover bg-center text-center"
-      style={{ backgroundImage: `url(${imagePath || "/images/banner.jpg"})` }}
+      className="relative flex items-center justify-center h-[300px] md:h-[400px] lg:h-[500px] bg-cover bg-center text-center "
+      style={{ backgroundImage: `url(${imagePath || "/images/banner.jpg"})`,
+         borderRadius: '20px'
+       }}
     >
-      <div className="absolute inset-0 bg-black bg-opacity-70"></div>
+      <div className="absolute rounded-md inset-0 bg-black bg-opacity-70"></div>
       <div className="relative z-10 max-w-3xl px-6 md:px-12 ">
         <h2 className="mb-4 font-title text-3xl md:text-5xl font-bold text-white">
           {title}
@@ -63,12 +65,6 @@ const DemoBanner = ({
             </BreadcrumbList>
           </Breadcrumb>
         </div>
-        <Button
-          variant="outline"
-          className="w-8/12   transition"
-        >
-          Get Started
-        </Button>
       </div>
     </div>
   );
