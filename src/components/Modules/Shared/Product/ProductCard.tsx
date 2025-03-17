@@ -12,29 +12,8 @@ import {
 import { IMedicine } from "@/types/medicinesTypes";
 import Image from "next/image";
 import Link from "next/link";
-import { toast } from "sonner";
-import { addToCart } from "@/utils/actions/cart";
 
 const ProductCard = ({ medicine }: { medicine: IMedicine }) => {
-  // Handle Add to Cart with productId and quantity
-  const handleAddToCart = async () => {
-    const id = toast.loading("Adding to Cart...");
-
-    try {
-      const cartData = {
-        medicineId: medicine?._id,
-      };
-
-      const response = await addToCart(cartData);
-
-      if (response?.success) {
-        toast.success("Added to Cart Successfully", { id: id });
-      }
-    } catch (error) {
-      toast.error("Error adding to cart");
-    }
-  };
-
   return (
     <>
       <Card className="p-4 rounded-xl shadow-lg">
@@ -87,7 +66,6 @@ const ProductCard = ({ medicine }: { medicine: IMedicine }) => {
             <span className="text-2xl font-bold">${medicine?.price}</span>
             <Link href={`/shop/${medicine?._id}`}>
               <Button
-                onClick={handleAddToCart}
                 variant={"default"}
                 className=" flex items-center space-x-2"
               >

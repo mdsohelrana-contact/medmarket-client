@@ -56,18 +56,13 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ cart }) => {
       phoneNumber: data.phoneNumber,
     };
 
-    console.log(orderData, "from response: ");
-
     try {
       const res = await createCheckout(orderData);
-
-      console.log(res, "Check response");
-
       if (res.success && res.data?.redirectUrl) {
         toast.success("Processing for Purchase...");
         router.push(res.data.redirectUrl);
       } else {
-        throw new Error(res.message || "Unknown error during checkout.");
+        toast.error(res?.message)
       }
     } catch (error) {
       console.error("Checkout error:", error);

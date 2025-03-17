@@ -11,7 +11,7 @@ export const getOrdersByUserId = async () => {
         authorization: (await cookies()).get("accessToken")!.value,
       },
       next: {
-        tags: ["CARTS"],
+        tags: ["ORDERS"],
       },
     });
     const data = await res.json();
@@ -32,7 +32,7 @@ export const getAllOrders = async () => {
         authorization: (await cookies()).get("accessToken")!.value,
       },
       next: {
-        tags: ["CARTS"],
+        tags: ["ORDERS"],
       },
     });
     const data = await res.json();
@@ -59,7 +59,7 @@ export const updateOrderIntentStatus = async (
          body: JSON.stringify(status),
        }
      );
-     revalidateTag("MEDICINES");
+     revalidateTag("ORDERS");
  
      const data = await res.json();
  

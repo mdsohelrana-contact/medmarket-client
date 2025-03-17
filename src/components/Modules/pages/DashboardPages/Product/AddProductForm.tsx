@@ -23,7 +23,9 @@ type FormData = {
   dosage_form: string[];
   price: string;
   stock: string;
+  rating: number;
   imageUrl: string[];
+  manufacturer_details:string;
   prescription_required: boolean;
 };
 
@@ -59,6 +61,7 @@ const AddProductForm = () => {
       ...data,
       price: Number(data.price),
       stock: Number(data.stock),
+      rating: Number(data.rating),
       imageUrl: uploadedImageUrl,
     };
 
