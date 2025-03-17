@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { currentUser, logOut } from "@/redux/features/user/authSlice";
 import { getUserById } from "@/utils/actions/user/userActions";
 import { useRouter } from "next/navigation";
+import ThemeToggle from "../ThemeToggle";
 
 // This is sample data.
 
@@ -59,8 +60,7 @@ const navMain = [
 ];
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-
-  const router  = useRouter();
+  const router = useRouter();
 
   const dispatch = useAppDispatch();
   const user = useAppSelector(currentUser);
@@ -69,7 +69,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   // fetch current user information
   React.useEffect(() => {
     const fetchUserData = async () => {
-      const  data = await getUserById(user?.userId as string);
+      const data = await getUserById(user?.userId as string);
       setUserData(data?.data);
     };
 
@@ -80,6 +80,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const handleLogout = () => {
     dispatch(logOut());
     localStorage.removeItem("accessToken");
+    document.cookie =
+      "accessToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC";
     router.push("/");
   };
 
@@ -87,6 +89,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <Sidebar collapsible="icon" {...props}>
       <SidebarContent>
         <NavMain items={navMain} />
+        <div className="text-center">
+          <ThemeToggle />
+        </div>
       </SidebarContent>
       <SidebarFooter>
         {userData && <UserProfile user={userData} logoutFn={handleLogout} />}

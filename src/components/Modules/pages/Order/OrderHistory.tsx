@@ -14,10 +14,11 @@ import { IOrderHistoryResponse } from "@/types/orderTypes";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-
+import { PaginationDemo } from "../DashboardPages/Product/All-Products/DemoPagination";
 
 const OrderHistory = ({ orders }: { orders: IOrderHistoryResponse }) => {
   const { result = [], totalCost = 0 } = orders || {};
+
 
   return (
     <div className="container mx-auto p-5">
@@ -51,7 +52,8 @@ const OrderHistory = ({ orders }: { orders: IOrderHistoryResponse }) => {
             </CardTitle>
             {totalCost > 0 && (
               <div className="text-lg font-semibold  mt-2">
-                Total Cost: <span className="text-blue-600">${totalCost.toFixed(2)}</span>
+                Total Cost:{" "}
+                <span className="text-blue-600">${totalCost.toFixed(2)}</span>
               </div>
             )}
           </CardHeader>
@@ -62,9 +64,7 @@ const OrderHistory = ({ orders }: { orders: IOrderHistoryResponse }) => {
                   <TableHead className="text-lg font-semibold ">
                     Product Name(s)
                   </TableHead>
-                  <TableHead className="text-lg font-semibold ">
-                    Date
-                  </TableHead>
+                  <TableHead className="text-lg font-semibold ">Date</TableHead>
                   <TableHead className="text-lg font-semibold ">
                     Total
                   </TableHead>
@@ -128,7 +128,9 @@ const OrderHistory = ({ orders }: { orders: IOrderHistoryResponse }) => {
               </TableBody>
             </Table>
 
-            
+          <div className="mt-5">
+          <PaginationDemo metadata={orders.meta} />
+          </div>
           </CardContent>
         </Card>
       )}

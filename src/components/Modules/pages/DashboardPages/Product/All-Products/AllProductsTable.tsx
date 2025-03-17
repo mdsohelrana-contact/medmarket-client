@@ -17,7 +17,16 @@ import { Edit, Edit2, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { removeMedicine } from "@/utils/actions/products";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useState } from "react";
 
 const AllProductsTable = ({
   medicines,
@@ -27,6 +36,8 @@ const AllProductsTable = ({
   meta: IMeta;
 }) => {
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   // handle remove medicine
   const handleRemoveMedicine = async (medicineId: string) => {
@@ -43,14 +54,50 @@ const AllProductsTable = ({
     }
   };
 
+  // Preserve existing query params
+  const createQueryString = (params: Record<string, string | number>) => {
+    const newParams = new URLSearchParams(searchParams);
+    Object.entries(params).forEach(([key, value]) => {
+      newParams.set(key, value.toString());
+    });
+    return `${pathname}?${newParams.toString()}`;
+  };
+
+  // Get sort order from URL or default to ascending
+  const [sortOrder, setSortOrder] = useState(
+    searchParams.get("sort") || "price"
+  );
+
   // handle update medicine
   const handleUpdateMedicine = (medicineId: string) => {
     console.log(medicineId, "for update medicine");
     router.push(`/dashboard/manage-products/update-product/${medicineId}`);
   };
 
+  // Handle sort change
+  const handleSortChange = (value: string) => {
+    setSortOrder(value);
+    router.push(createQueryString({ sort: value, page: 1 }));
+  };
+
   return (
     <>
+      <div className="my-5 text-center mx-auto">
+        {/* Sorting Dropdown */}
+        <Select onValueChange={handleSortChange} value={sortOrder}>
+          <SelectTrigger>
+            <SelectValue placeholder="Sort By" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem value="-price">High Price</SelectItem>
+              <SelectItem value="price">Low Price</SelectItem>
+              <SelectItem value="-stock">High Stock</SelectItem>
+              <SelectItem value="stock">Low Stock</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
       <Table>
         <TableHeader>
           <TableRow>

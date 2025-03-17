@@ -8,6 +8,12 @@ export interface IAddress {
 export interface IOrderMedicines {
   medicineId: IMedicine;
   quantity: number;
+
+  medicineInfo: {
+    dosageForm: string;
+    prescription: string;
+    strength: string;
+  };
   _id: string;
 }
 

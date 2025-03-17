@@ -113,8 +113,8 @@ const UpdateProductForm = ({ medicine }: { medicine: IMedicine }) => {
   };
 
   return (
-    <section className="bg-white dark:bg-gray-900 py-8 px-4 mx-auto max-w-2xl lg:py-16">
-      <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
+    <section className=" py-8 px-4 w-full lg:py-16">
+      <h2 className="mb-4 text-xl font-bold ">
         Update This <Badge variant="destructive">{medicine?.name}</Badge>
       </h2>
 

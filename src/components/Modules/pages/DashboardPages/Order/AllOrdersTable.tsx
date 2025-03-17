@@ -15,6 +15,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { PaginationDemo } from "../Product/All-Products/DemoPagination";
 import { updateOrderIntentStatus } from "@/utils/actions/orders";
+import Image from "next/image";
 
 const AllOrdersTable = ({
   orders,
@@ -25,8 +26,7 @@ const AllOrdersTable = ({
 }) => {
   const router = useRouter();
 
-  console.log(orders)
-
+  console.log(orders);
 
   // Function to update order intent
   const handleUpdateIntent = async (orderId: string, newIntent: string) => {
@@ -39,10 +39,9 @@ const AllOrdersTable = ({
       if (res.success) {
         toast.success(res.message);
         router.refresh(); // Refresh the page or refetch data
+      } else {
+        toast.error(res.message || "Failed to update order intent.");
       }
-    else{
-      toast.error(res.message||"Failed to update order intent.");
-    }  
     } catch (error) {
       toast.error("Failed to update order intent.");
     }
@@ -54,7 +53,7 @@ const AllOrdersTable = ({
         <TableHeader>
           <TableRow>
             {/* <TableHead className="">userId</TableHead> */}
-            <TableHead>Phone Number</TableHead>
+            <TableHead>Rx</TableHead>
             <TableHead>Order-Intent</TableHead>
             <TableHead>Payment-Status</TableHead>
             <TableHead className="text-right">Total Amount</TableHead>
@@ -71,7 +70,23 @@ const AllOrdersTable = ({
             return (
               <TableRow key={order?._id} className="font-medium">
                 {/* <TableCell>{order?.userId}</TableCell> */}
-                <TableCell>{order.phoneNumber}</TableCell>
+                <TableCell>
+                  <div className="w-16 h-16 relative">
+                    {order?.medicines?.map((item) =>
+                      item.medicineInfo.prescription === "" ? (
+                        <p className="text-sm py-5">Rx not required</p>
+                      ) : (
+                        <Image
+                          src={item?.medicineInfo.prescription}
+                          alt={item.medicineId.name}
+                          layout="fill"
+                          objectFit="cover"
+                          className="rounded-lg"
+                        />
+                      )
+                    )}
+                  </div>
+                </TableCell>
 
                 <TableCell>
                   {order.orderIntent === "delivered" ? (
@@ -158,7 +173,7 @@ const AllOrdersTable = ({
         </TableFooter>
       </Table>
       <div className="my-2">
-        <PaginationDemo metadata={orders?.meta} />{" "}
+        <PaginationDemo metadata={orders?.meta} />
       </div>
     </>
   );

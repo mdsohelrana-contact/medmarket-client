@@ -16,19 +16,13 @@ const Footer = () => {
           {/* Left Side: Links */}
           <div className="flex flex-wrap gap-6 mb-4 md:mb-0">
             <Link href="/about" className="hover:text-gray-400">
-              About
-            </Link>
-            <Link href="/privacy-policy" className="hover:text-gray-400">
-              Privacy Policy
-            </Link>
-            <Link href="/licensing" className="hover:text-gray-400">
-              Licensing
+              Shop
             </Link>
             <Link href="/contact" className="hover:text-gray-400">
               Contact
             </Link>
             <Link href="/contact" className="hover:text-gray-400">
-              FAQ
+              About
             </Link>
           </div>
 

@@ -16,10 +16,12 @@ interface IMonthly {
 
 const DashboardHome = ({ monthly }: { monthly: IMonthly[] }) => {
   // Format the data for the chart
-  const formattedData = monthly?.map((item, index) => ({
-    month: `March ${index + 1}`,
+  const formattedData = monthly?.map((item) => ({
+    month: item._id,
     totalSales: item.totalSales || 0,
   }));
+
+  console.log(monthly)
 
   return (
     <div className="p-4 border border-gray-200 rounded-xl">

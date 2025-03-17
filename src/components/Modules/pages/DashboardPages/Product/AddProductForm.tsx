@@ -97,9 +97,9 @@ const AddProductForm = () => {
   };
 
   return (
-    <section className="bg-white dark:bg-gray-900 py-8 px-4 mx-auto max-w-2xl lg:py-16">
-      <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
-        Add a New Product
+    <section className=" py-8 px-4 mx-auto w-full lg:py-16">
+      <h2 className="mb-4 text-xl font-bold ">
+        Add a New Medicine
       </h2>
 
       <Form {...form}>
@@ -116,6 +116,13 @@ const AddProductForm = () => {
               name="generic_name"
               label="Generic Name"
               placeholder="Enter generic name..."
+            />
+
+            <SFormInput
+              control={form.control}
+              name="manufacturer_details"
+              label="Manufacturer"
+              placeholder="Enter Manufacturer details..."
             />
 
             {/* Brand name as Dynamic Array */}
@@ -262,6 +269,13 @@ const AddProductForm = () => {
               name="stock"
               label="Stock"
               placeholder="Enter stock..."
+              type="number"
+            />
+            <SFormInput
+              control={form.control}
+              name="rating"
+              label="Rating"
+              placeholder="Enter rating..."
               type="number"
             />
 

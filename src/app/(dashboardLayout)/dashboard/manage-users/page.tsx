@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import AllUsersTable from "@/components/Modules/pages/DashboardPages/User/AllUsersTable";
-import DemoBanner from "@/components/Modules/Shared/DemoBanner/DemoBanner";
 import { getAllUsers } from "@/utils/actions/user/userActions";
 
 const ManageUsersPage = () => {
@@ -31,8 +30,8 @@ const ManageUsersPage = () => {
   if (loading) return <div>Loading users...</div>;
 
   return (
-    <div>
-      <DemoBanner title="Manage users here..." description="All users" />
+    <div className="w-full text-center">
+      {/* <DemoBanner title="Manage users here..." description="All users" /> */}
       <div className="p-5">
         <AllUsersTable users={users} meta={meta} />
       </div>
