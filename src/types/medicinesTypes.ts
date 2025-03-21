@@ -10,6 +10,7 @@ export interface IMedicine {
   prescription_required: boolean;
   price: number;
   stock: number;
+  rating?:number;
   manufacturer_details: string;
   expiry_date: string;
   strength: string[];

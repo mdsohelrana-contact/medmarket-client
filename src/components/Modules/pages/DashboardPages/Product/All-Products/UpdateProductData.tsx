@@ -26,7 +26,9 @@ type FormData = {
   dosage_form?: string[];
   price?: any;
   stock?: any;
+  rating: number;
   imageUrl?: string[] | string;
+  manufacturer_details: string;
   prescription_required?: boolean;
 };
 
@@ -43,6 +45,8 @@ const UpdateProductForm = ({ medicine }: { medicine: IMedicine }) => {
     strength,
     symptoms,
     dosage_form,
+    manufacturer_details,
+    rating,
     imageUrl,
   } = medicine;
 
@@ -61,7 +65,9 @@ const UpdateProductForm = ({ medicine }: { medicine: IMedicine }) => {
       dosage_form,
       price,
       stock,
+      rating: medicine?.rating,
       imageUrl: imageUrl || [],
+      manufacturer_details: manufacturer_details || "Not available",
       prescription_required,
     },
   });
@@ -79,6 +85,7 @@ const UpdateProductForm = ({ medicine }: { medicine: IMedicine }) => {
         ...data,
         price: Number(data.price),
         stock: Number(data.stock),
+        rating: Number(data.rating),
         imageUrl: uploadedImageUrl,
       };
 
@@ -120,18 +127,57 @@ const UpdateProductForm = ({ medicine }: { medicine: IMedicine }) => {
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)}>
-          <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
+          <div className="grid gap-5 grid-cols-1 md:grid-cols-2 justify-end items-center">
             <SFormInput
               control={form.control}
               name="name"
               label="Medicine Name"
+              placeholder="Enter medicine name..."
             />
             <SFormInput
               control={form.control}
               name="generic_name"
               label="Generic Name"
+              placeholder="Enter generic name..."
+            />
+            <SFormInput
+              control={form.control}
+              name="manufacturer_details"
+              label="Manufacturer"
             />
 
+            <SFormInput
+              control={form.control}
+              name="category"
+              label="Category"
+              placeholder="Enter category..."
+            />
+
+            {/* Price and Stock Inputs */}
+            <SFormInput
+              control={form.control}
+              name="price"
+              label="Price"
+              placeholder="Enter price..."
+              type="number"
+            />
+            <SFormInput
+              control={form.control}
+              name="stock"
+              label="Stock"
+              placeholder="Enter stock..."
+              type="number"
+            />
+            <SFormInput
+              control={form.control}
+              name="rating"
+              label="Rating"
+              placeholder="Enter rating..."
+              type="number"
+            />
+          </div>
+
+          <div className="grid gap-5 grid-cols-1 md:grid-cols-2 my-5">
             {/* Brand Name */}
             <div>
               <label className="block text-sm font-medium">Brand Name</label>
@@ -160,12 +206,33 @@ const UpdateProductForm = ({ medicine }: { medicine: IMedicine }) => {
               </button>
             </div>
 
-            {/* Category */}
-            <SFormInput
-              control={form.control}
-              name="category"
-              label="Category"
-            />
+            {/* strength*/}
+            <div>
+              <label className="block text-sm font-medium">Strength</label>
+              {form.watch("strength")?.map((_, index) => (
+                <div key={index} className="flex items-center space-x-2 mb-2">
+                  <SFormInput
+                    control={form.control}
+                    name={`strength.${index}`}
+                  />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => handleRemoveItem("strength", index)}
+                  >
+                    <Trash2 className="w-5 h-5 text-red-500" />
+                  </Button>
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={() => handleAddItem("strength")}
+                className="text-blue-500"
+              >
+                Add Another Strength
+              </button>
+            </div>
 
             {/* Symptoms */}
             <div>
@@ -222,33 +289,19 @@ const UpdateProductForm = ({ medicine }: { medicine: IMedicine }) => {
                 Add Another Symptom
               </button>
             </div>
-
-            {/* Price & Stock */}
-            <SFormInput
-              control={form.control}
-              name="price"
-              label="Price"
-              type="number"
-            />
-            <SFormInput
-              control={form.control}
-              name="stock"
-              label="Stock"
-              type="number"
-            />
-
-            {/* Image Upload  */}
-            <SFormImageUpload
-              control={form.control}
-              name="imageUrl"
-              label="Medicine Images"
-              multiple={true}
-              onImageUpload={setMedicineImageUrl}
-            />
           </div>
 
+          {/* Image Upload  */}
+          <SFormImageUpload
+            control={form.control}
+            name="imageUrl"
+            label="Medicine Images"
+            multiple={true}
+            onImageUpload={setMedicineImageUrl}
+          />
+
           {/* Image Preview */}
-          <div className="my-5 flex flex-wrap gap-5">
+          <div className="mb-5 flex flex-wrap gap-5">
             {Array.isArray(imageUrl) &&
               imageUrl.map((item: any, index: number) => (
                 <Image

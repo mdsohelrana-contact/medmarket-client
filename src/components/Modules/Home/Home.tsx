@@ -41,7 +41,7 @@ const Home = ({ medicines }: { medicines: IMedicine[] }) => {
         </div>
 
         <div className="mt-6 text-center">
-          <Button>
+          <Button variant="default" className="text-white font-description">
             <Link className="font-description" href="/shop">Shop here</Link>{" "}
           </Button>
         </div>

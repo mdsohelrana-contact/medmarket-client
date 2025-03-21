@@ -1,18 +1,11 @@
 "use client";
-import React, { useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Search } from "lucide-react";
-import { usePathname, useRouter } from "next/navigation";
 
 import styles from "./BrandingSection.module.css";
-import TitleContainer from "../../Shared/TitleContainer/TitleContainer";
+
 import Image from "next/image";
 
 export default function BrandingSection() {
-  const router = useRouter();
-  const pathname = usePathname();
+
 
   const brands = [
     { name: "GSK", logo: "https://i.ibb.co.com/wZrG2302/pngwing-com-2.png" },
@@ -42,11 +35,12 @@ export default function BrandingSection() {
 
         {/* Brand Infinity Slide */}
         <div
-          className={`absolute bottom-0  left-0 w-full py-4 ${styles.infinityLoopContainer}`}
+          className={`absolute bottom-0  left-0 w-full py-4 ${styles?.infinityLoopContainer}`}
         >
           <div className={styles.infinityLoop}>
-          {brands.map((brand, index) => (
+          {brands?.map((brand, index) => (
                 <Image
+                  key={index}
                   src={brand.logo}
                   alt={brand.name}
                   width={100}

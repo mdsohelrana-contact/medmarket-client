@@ -51,7 +51,7 @@ const ReviewCard = ({ reviews }: { reviews: IReview[] }) => {
                 <CardContent className="text-center px-4 py-2">
                   <p className=" italic font-description">{review?.comment}</p>
                 </CardContent>
-                <CardFooter className="text-center text-sm text-gray-600">
+                <CardFooter className="text-center text-sm text-gray-400">
                   <p className="font-description">{review?.user}</p>
                 </CardFooter>
               </Card>
