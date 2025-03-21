@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# MedStore - E-commerce Platform
 
-First, run the development server:
+MedStore is a modern e-commerce application built using providing a seamless shopping experience for medical products. The project follows best practices in performance, accessibility, and scalability.
+
+
+---
+
+## Features !!
+
+- Fast and Scalable: Built with Next.js for server-side rendering and static site generation.
+- User Authentication: Supports authentication using Firebase/Auth or other third-party providers.
+- Admin Dashboard: Manage products, orders, and users from a dedicated admin panel.
+- Order Tracking: Customers can track their orders in real time.
+- Search and Filtering: Advanced search functionality with category and price filtering.
+
+---
+
+
+###  `Technologies` Used
+
+- Backend : `Express.js` with `TypeScript`
+- Database : `MongoDB` with `Mongoose`
+- Error Handling : Fllow globals errorHandle model
+- Environment Variables : Managed with `dotenv`
+
+
+## Run Locally
+
+Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  https://github.com/rana5699/next-six-client
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Go to the project directory
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+ cd medstore
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
 
-## Learn More
+Install dependencies
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+  npm install -y
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Start the server
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+  npm run dev
+```
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your `.env` file
+
+`NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`
+
+`CLOUDINARY_API_SECRET`
+
+`NEXT_PUBLIC_CLOUDINARY_API_KEY`
+
+`NEXT_PUBLIC_BASE_API`
+
+`NEXT_PUBLIC_FAKE_IMAGE_URL`
+
+
+
+
+
+
+## API Reference
+
+### Authentication
+
+## Users
+
+### Register User (POST)
+
+```http
+  /api/auth/register
+```
+
+
+#### Login user (POST)
+
+```http
+  /api/auth/login
+```
+
+
+
+## Server Live URL
+
+https://next-assignment-six-alpha.vercel.app/
