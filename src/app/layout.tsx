@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat, Open_Sans } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Modules/Providers/Providers";
-import { Toaster } from "@/components/ui/sonner"
+import { Toaster } from "@/components/ui/sonner";
 import Head from "next/head";
 // Title font (Montserrat)
 const montserrat = Montserrat({
@@ -45,17 +45,15 @@ const RootLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <html lang="en"  cz-shortcut-listen="true">
+    <html lang="en" cz-shortcut-listen="true">
       <body
         className={`${montserrat.variable} ${openSans.variable} antialiased`}
       >
-          <Head>
-          <link rel="icon" href="./favicon.ico" />
-        </Head>
         <Providers>
           <div className="">
-            <div className="min-h-screen">{children}
-            <Toaster />
+            <div className="min-h-screen">
+              {children}
+              <Toaster />
             </div>
           </div>
         </Providers>

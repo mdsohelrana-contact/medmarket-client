@@ -10,12 +10,14 @@ export interface IMedicine {
   prescription_required: boolean;
   price: number;
   stock: number;
+  manufacturer_details: string;
+  expiry_date: string;
   strength: string[];
   symptoms: string[];
   updatedAt: string;
 }
 
 export interface ICart {
-  medicineId:string;
+  medicineId: string;
   quantity?: number;
 }

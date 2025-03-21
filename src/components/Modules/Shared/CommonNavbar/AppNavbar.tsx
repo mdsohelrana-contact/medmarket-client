@@ -187,23 +187,32 @@ const AppNavbar = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="ml-3">
-              <ThemeToggle />
-            </div>
+        
 
             {/* Auth Button */}
-            <div className="hidden md:flex">
-              {user ? (
-                <Button variant="outline" onClick={handleLogout}>
-                  Logout
-                </Button>
+            <div className="">
+              {userData ? (
+                 <div className="flex items-center space-x-4">
+                 <motion.div
+                   className="flex items-center space-x-2 text-sm font-medium dark:text-white"
+                   initial={{ opacity: 0, x: -100 }}
+                   animate={{ opacity: 1, x: 0 }}
+                   transition={{ duration: 0.5 }}
+                 >
+                   <UserProfile user={userData} logoutFn={handleLogout} />
+                 </motion.div>
+               </div>
               ) : (
                 <Button variant="outline">
-                  <Link href="/login">Login</Link>
+                  <Link href="/login" className="font-description">Login</Link>
                 </Button>
               )}
             </div>
+            
             {/* <ModeToggle /> */}
+            <div className="ml-3">
+              <ThemeToggle />
+            </div>
           </motion.div>
         </div>
       )}

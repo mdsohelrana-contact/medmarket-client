@@ -16,7 +16,7 @@ import Link from "next/link";
 const ProductCard = ({ medicine }: { medicine: IMedicine }) => {
   return (
     <>
-      <Card className="p-4 rounded-xl shadow-lg">
+      <Card className=" p-4 rounded-xl shadow-lg">
         {/* Product Image */}
         <div className="  rounded-lg flex items-center justify-center">
           {medicine?.imageUrl &&
@@ -34,12 +34,14 @@ const ProductCard = ({ medicine }: { medicine: IMedicine }) => {
 
         <CardContent className="mt-4">
           {/* Discount Badge */}
-          <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded-lg">
+          <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded-lg font-description">
             Up to 35% off
           </span>
 
           {/* Product Title */}
-          <h2 className="mt-2 text-lg font-semibold">{medicine?.name}</h2>
+          <h2 className="mt-2 text-lg font-semibold font-title">
+            {medicine?.name}
+          </h2>
 
           {/* Rating */}
           <div className="flex items-center space-x-1 mt-2">
@@ -48,29 +50,29 @@ const ProductCard = ({ medicine }: { medicine: IMedicine }) => {
                 ★
               </span>
             ))}
-            <span className="text-sm ml-1">5.0 (455)</span>
+            <span className="text-sm ml-1 font-description">5.0 (455)</span>
           </div>
 
           {/* Delivery & Price Badge */}
           <div className="flex items-center gap-2 text-sm mt-2 ">
             <div className="flex items-center">
-              <Truck className="w-4 h-4 mr-1" /> Fast Delivery
+              <Truck className="w-4 h-4 mr-1 font-description" /> Fast Delivery
             </div>
             <div className="flex items-center">
-              <BadgeDollarSign className="w-4 h-4 mr-1" /> Best Price
+              <BadgeDollarSign className="w-4 h-4 mr-1 font-description" /> Best Price
             </div>
           </div>
 
           {/* Price & Add to Cart */}
           <div className="flex items-center justify-between mt-4">
-            <span className="text-2xl font-bold">${medicine?.price}</span>
+            <span className="text-2xl font-bold font-title">${medicine?.price}</span>
             <Link href={`/shop/${medicine?._id}`}>
               <Button
                 variant={"default"}
-                className=" flex items-center space-x-2"
+                className="w-full flex items-center space-x-2"
               >
                 <EyeIcon className="w-5 h-5" />
-                <span>View Details</span>
+                <span  className="font-description" >View Details</span>
               </Button>
             </Link>
           </div>

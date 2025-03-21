@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import ReviewCard from "./ReviewCard";
 import { getReviews } from "@/utils/actions/review";
+import { toast } from "sonner";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const ReviewSection = () => {
   const [reviews, setReviews] = useState<any[]>([]);
@@ -17,29 +19,35 @@ const ReviewSection = () => {
           setReviews(data.data);
           setLoading(false);
         }
-      } catch (error) {
-        console.error("Error fetching reviews:", error);
+      } catch (error:any) {
+        toast.error("Error fetching reviews:", error);
       }
     };
 
     fetchReviews();
   }, []);
 
-  // Render loading
-  if (loading) {
-    return <p>Loading reviews...</p>;
-  }
+ // Render loading skeleton
+ if (loading) {
   return (
-    <section>
-      {
-        reviews.length > 0 ? (
-          
-            <ReviewCard  reviews={reviews} />
-        
-        ) : (
-          <p className="text-center text-gray-500 text-lg">No reviews available at the moment.</p>
-        ) 
-      }
+    <section className="mx-5">
+      <div className="flex flex-col gap-4">
+        {[...Array(3)].map((_, index) => (
+          <Skeleton key={index} className="h-20 w-full rounded-lg" />
+        ))}
+      </div>
+    </section>
+  );
+}
+  return (
+    <section className="mx-5">
+      {reviews.length > 0 ? (
+        <ReviewCard reviews={reviews} />
+      ) : (
+        <p className="text-center text-gray-500 text-lg font-description">
+          No reviews available at the moment.
+        </p>
+      )}
     </section>
   );
 };

@@ -32,13 +32,15 @@ export function UserProfile({
         <button className="flex items-center gap-2 p-2 rounded-md hover:bg-gray-200">
           <Avatar className="h-8 w-8 rounded-lg">
             <AvatarImage src={user?.profileImg} alt={user?.name} />
-            <AvatarFallback className="rounded-lg">
+            <AvatarFallback className="rounded-lg font-description">
               {fallbackLetters}
             </AvatarFallback>
           </Avatar>
           <div className="flex flex-col text-left text-sm">
-            <span className="font-semibold">{user?.name}</span>
-            <span className="text-xs text-gray-500">{user?.email}</span>
+            <span className="font-semibold font-description">{user?.name}</span>
+            <span className="text-xs text-gray-500 font-description">
+              {user?.email}
+            </span>
           </div>
           <ChevronsUpDown className="ml-auto" />
         </button>
@@ -49,20 +51,24 @@ export function UserProfile({
           <div className="flex items-center gap-2 text-sm">
             <Avatar className="h-8 w-8 rounded-lg">
               <AvatarImage src={user?.profileImg} alt={user?.name} />
-              <AvatarFallback className="rounded-lg">
+              <AvatarFallback className="rounded-lg font-description">
                 {fallbackLetters}
               </AvatarFallback>
             </Avatar>
             <div className="text-left">
-              <span className="font-semibold">{user?.name}</span>
+              <span className="font-semibold font-description">
+                {user?.name}
+              </span>
               <br />
-              <span className="text-xs text-gray-500">{user?.email}</span>
+              <span className="text-xs text-gray-500 font-description">
+                {user?.email}
+              </span>
             </div>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuItem
           onClick={handleLogout}
-          className="cursor-pointer text-sm flex items-center gap-2 text-gray-700"
+          className="cursor-pointer text-sm flex items-center gap-2 text-gray-700 font-description"
         >
           <LogOut className="w-4 h-4" />
           Log out

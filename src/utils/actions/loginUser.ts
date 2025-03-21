@@ -2,7 +2,6 @@
 
 import { ILoginInput } from "@/types/authTypes";
 import { cookies } from "next/headers";
-// import { redirect } from "next/navigation";
 
 // login user
 export const loginUser = async (data: ILoginInput) => {

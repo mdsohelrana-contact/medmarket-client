@@ -16,6 +16,7 @@ import { addToCart } from "@/utils/actions/cart";
 import useImageUploader from "@/utils/useImageUploader";
 import SFormImageUpload from "../Form/SFormImageUpload";
 import { FormProvider, useForm } from "react-hook-form";
+import { decodedToken } from "@/utils/decodedToken";
 
 const ProductDetails = ({ medicineData }: { medicineData: IMedicine }) => {
   const form = useForm();
@@ -39,8 +40,16 @@ const ProductDetails = ({ medicineData }: { medicineData: IMedicine }) => {
     if (quantity > 1) setQuantity(quantity - 1);
   };
 
+  // get token from local storage
+  const token = localStorage.getItem("accessToken") as string;
+
   // Handle Add to Cart with productId and quantity
   const handleAddToCart = async () => {
+    if (!token) {
+      toast.error("Please login to add medicine to cart.");
+      redirect("/login");
+    }
+
     if (medicine.prescription_required && !prescription) {
       toast.warning("Please upload a valid prescription to proceed.");
       return;
@@ -91,6 +100,16 @@ const ProductDetails = ({ medicineData }: { medicineData: IMedicine }) => {
 
   // Handle Buy Now with Prescription Upload
   const handleBuyNow = async () => {
+    if (!token) {
+      toast.error("Please login to buy now.");
+      redirect("/login");
+    }
+
+    if (quantity > medicineData.stock) {
+      toast.error("Not enough stock available. Please reduce the quantity.");
+      return;
+    }
+
     if (
       medicine.prescription_required &&
       Array.isArray(prescription) &&
@@ -120,7 +139,7 @@ const ProductDetails = ({ medicineData }: { medicineData: IMedicine }) => {
 
     const res = await createCheckout(orderData);
 
-    console.log(res)
+    console.log(res);
 
     if (res.success && res?.data?.redirectUrl) {
       toast.success("Processing for Purchase...");
@@ -137,7 +156,7 @@ const ProductDetails = ({ medicineData }: { medicineData: IMedicine }) => {
         <Card>
           <CardHeader className="text-center">
             <CardTitle className="text-3xl font-bold flex items-center justify-center gap-2">
-              <Pill className="w-8 h-8 text-blue-500" /> {medicine?.name}
+              <Pill className="w-8 h-8 text-blue-500 font-title" /> {medicine?.name}
             </CardTitle>
           </CardHeader>
 
@@ -162,20 +181,37 @@ const ProductDetails = ({ medicineData }: { medicineData: IMedicine }) => {
             {/* Basic Info */}
             <div className="text-lg space-y-2">
               <p>
-                <span className="font-semibold text-gray-500">
+                <span className="font-semibold font-description text-gray-500">
                   Generic Name:
                 </span>{" "}
                 {medicine?.generic_name}
               </p>
               <p>
-                <span className="font-semibold text-gray-500">Category:</span>{" "}
+                <span className="font-semibold font-description text-gray-500">Category:</span>{" "}
                 {medicine?.category}
               </p>
               <p>
-                <span className="font-semibold text-gray-500">
+                <span className="font-semibold font-description text-gray-500">
                   Symptoms Treated:
                 </span>{" "}
                 {medicine?.symptoms}
+              </p>
+
+              <p>
+                <span className="font-semibold font-description text-gray-500">
+                  Manufacturer By:
+                </span>{" "}
+                {medicine?.manufacturer_details || "Unknown Manufacturer"}
+              </p>
+              <p>
+                <span className="font-semibold font-description text-gray-500">
+                  Expiry date:
+                </span>{" "}
+                {medicine?.expiry_date || "No Expiry Date Available"}
+              </p>
+              <p>
+                <span className="font-semibold font-description text-gray-500">Stock:</span>{" "}
+                {medicine?.stock}
               </p>
             </div>
 
@@ -195,7 +231,7 @@ const ProductDetails = ({ medicineData }: { medicineData: IMedicine }) => {
               <div className="flex items-center gap-2">
                 <label
                   htmlFor="strength"
-                  className="font-semibold text-gray-500"
+                  className="font-semibold font-description text-gray-500"
                 >
                   Strength:
                 </label>
@@ -215,7 +251,7 @@ const ProductDetails = ({ medicineData }: { medicineData: IMedicine }) => {
               <div className="flex items-center gap-2">
                 <label
                   htmlFor="dosage_form"
-                  className="font-semibold text-gray-500"
+                  className="font-semibold font-description text-gray-500"
                 >
                   Dosage Form:
                 </label>
@@ -238,12 +274,12 @@ const ProductDetails = ({ medicineData }: { medicineData: IMedicine }) => {
 
             {/* Price & Quantity Selector */}
             <div className="flex items-center justify-between">
-              <p className="text-2xl font-bold text-blue-600">
+              <p className="text-2xl font-bold text-blue-600 font-title">
                 ${medicine?.price}
               </p>
 
               {medicine?.stock === 0 ? (
-                <span className="text-gray-500">Out of stock</span>
+                <span className="text-gray-500 font-description">Out of stock</span>
               ) : (
                 <div className="flex items-center gap-2">
                   <Button
@@ -276,8 +312,8 @@ const ProductDetails = ({ medicineData }: { medicineData: IMedicine }) => {
             <div className="grid grid-cols-2 gap-4 mt-4">
               <Button
                 onClick={handleAddToCart}
-                disabled={medicine?.stock === 0}
-                className="flex items-center justify-center gap-2 bg-gray-600 hover:bg-gray-700 text-white text-lg py-3"
+                disabled={medicine?.stock === 0 || isUploading}
+                className="font-description flex items-center justify-center gap-2 bg-gray-600 hover:bg-gray-700 text-white text-lg py-3"
               >
                 <ShoppingCart className="w-6 h-6" />
                 Add to Cart
@@ -285,8 +321,8 @@ const ProductDetails = ({ medicineData }: { medicineData: IMedicine }) => {
 
               <Button
                 onClick={handleBuyNow}
-                disabled={medicine?.stock === 0}
-                className="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white text-lg py-3"
+                disabled={medicine?.stock === 0 || isUploading}
+                className="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white text-lg py-3 font-description"
               >
                 <CreditCard className="w-6 h-6" />
                 Buy Now

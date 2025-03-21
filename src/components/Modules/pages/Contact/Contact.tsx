@@ -15,37 +15,37 @@ const Contact = () => {
         <div className="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           <Card className="transition-all">
             <CardHeader>
-              <h3 className="text-2xl font-semibold  flex items-center">
-                <FaMapMarkerAlt className="inline-block mr-2 text-blue-600" />
+              <h3 className="text-2xl font-semibold  flex items-center font-title">
+                <FaMapMarkerAlt className="inline-block mr-2 text-blue-600 font-title" />
                 Our Location
               </h3>
             </CardHeader>
             <CardContent>
-              <p className="">123, Medicine Street, E-Commerce City, Country</p>
+              <p className="font-description">123, Medicine Street, E-Commerce City, Country</p>
             </CardContent>
           </Card>
 
           <Card className="transition-all ">
             <CardHeader>
-              <h3 className="text-2xl font-semibold  flex items-center">
-                <FaPhoneAlt className="inline-block mr-2 text-blue-600" />
+              <h3 className="text-2xl font-semibold  flex items-center font-title">
+                <FaPhoneAlt className="inline-block mr-2 text-blue-600 font-title" />
                 Phone
               </h3>
             </CardHeader>
             <CardContent>
-              <p className="text-gray-700 dark:text-gray-300">+1 234 567 890</p>
+              <p className="font-description ">+1 234 567 890</p>
             </CardContent>
           </Card>
 
           <Card className="transition-all ">
             <CardHeader>
-              <h3 className="text-2xl font-semibold  flex items-center">
-                <FaEnvelope className="inline-block mr-2 text-blue-600" />
+              <h3 className="text-2xl font-semibold  flex items-center font-title">
+                <FaEnvelope className="inline-block mr-2 text-blue-600 font-title" />
                 Email
               </h3>
             </CardHeader>
             <CardContent>
-              <p className="text-gray-700 dark:text-gray-300">
+              <p className="font-description">
                 support@yourmedstore.com
               </p>
             </CardContent>
@@ -88,7 +88,7 @@ const Contact = () => {
                 <Button
                   type="submit"
                   variant="default"
-                  className="w-full"
+                  className="w-full font-description"
                 >
                   Send Message
                 </Button>

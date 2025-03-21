@@ -13,25 +13,25 @@ const FeaturesSection = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-start items-center gap-12 ">
         <div className="flex items-center space-x-6 hover:scale-105 transition-transform duration-300 ease-in-out">
           <CheckCircleIcon className="text-green-500 w-14 h-14" />
-          <p className="font-medium text-lg">
+          <p className="font-medium font-description text-lg">
             Affordable medicines for everyone
           </p>
         </div>
         <div className="flex items-center space-x-6 hover:scale-105 transition-transform duration-300 ease-in-out">
           <CheckCircleIcon className="text-green-500 w-14 h-14" />
-          <p className="font-medium text-lg">
+          <p className="font-medium font-description text-lg">
             Automatic refills, delivered to your door
           </p>
         </div>
         <div className="flex items-center space-x-6 hover:scale-105 transition-transform duration-300 ease-in-out">
           <CheckCircleIcon className="text-green-500 w-14 h-14" />
-          <p className="font-medium text-lg">
+          <p className="font-medium font-description text-lg">
             24/7 support from certified pharmacists
           </p>
         </div>
         <div className="flex items-center space-x-6 hover:scale-105 transition-transform duration-300 ease-in-out">
           <CheckCircleIcon className="text-green-500 w-14 h-14" />
-          <p className="font-medium text-lg">
+          <p className="font-medium font-description text-lg">
             Quick and reliable delivery service
           </p>
         </div>

@@ -20,10 +20,6 @@ export default function BrandingSection() {
       name: "Merck",
       logo: "https://i.ibb.co.com/j9Z688nJ/62cd6d6d55d69259cb08dc53624ab35c.png",
     },
-    // {
-    //   name: "Roche",
-    //   logo: "https://i.ibb.co.com/HL32kRhg/kisspng-roche-diagnostics-roche-holding-ag-blood-glucose-m-pharma-5acfb9296b3c97-1203857115235627934.pn",
-    // },
 
     { name: "Pfizer", logo: "https://i.ibb.co.com/v4bJWR2k/pngwing-com-3.png" },
     {
@@ -37,30 +33,6 @@ export default function BrandingSection() {
     { name: "Sanofi", logo: "https://i.ibb.co.com/ksqGzHpB/pngwing-com-6.png" },
   ];
 
-  // State to hold search parameters
-  const [searchParams, setSearchParams] = useState({
-    name: "",
-    category: "",
-    symptoms: "",
-  });
-
-  // Handle the input change for search fields
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-
-    // Update the searchParams state
-    setSearchParams((prev) => {
-      const updatedParams = { ...prev, [name]: value };
-
-      // Build the query string from updated searchParams
-      const query = new URLSearchParams(updatedParams).toString();
-
-      // Update the URL with the query string
-      router.push(`${pathname}?${query}`);
-
-      return updatedParams; // Return updated state
-    });
-  };
 
   return (
     <section>

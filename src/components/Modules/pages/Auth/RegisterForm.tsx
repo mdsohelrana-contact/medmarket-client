@@ -55,7 +55,7 @@ const RegisterForm = () => {
     <div className="flex flex-col w-full gap-6 max-w-2xl mx-auto">
       <Card className="">
         <CardHeader className="text-center">
-          <CardTitle className="text-xl">Create your Free Account</CardTitle>
+          <CardTitle className="text-xl font-title">Create your Free Account</CardTitle>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -113,14 +113,14 @@ const RegisterForm = () => {
                     disabled={password !== confirmPassword || isUploading}
                     type="submit"
                     variant={"outline"}
-                    className="w-full"
+                    className="w-full font-description "
                   >
                     {isUploading ? "Registering..." : "Register"}
                   </Button>
                 </div>
-                <div className="text-center text-sm">
+                <div className="text-center text-sm font-description">
                   Have an account?{" "}
-                  <Link href="/login" className="underline underline-offset-4">
+                  <Link href="/login" className="underline underline-offset-4 font-description">
                     Sign in
                   </Link>
                 </div>

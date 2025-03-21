@@ -62,10 +62,10 @@ const About = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-12">
           <Card className=" transition-all">
             <CardHeader>
-              <h3 className="text-2xl font-semibold ">Our Mission</h3>
+              <h3 className="text-2xl font-semibold font-title">Our Mission</h3>
             </CardHeader>
             <CardContent>
-              <p className="">
+              <p className="font-description">
                 Our mission is to provide affordable, high-quality medications
                 to everyone. We ensure that all medicines are sourced from
                 certified suppliers with fast, reliable delivery.
@@ -74,12 +74,12 @@ const About = () => {
           </Card>
           <Card className=" transition-all">
             <CardHeader>
-              <h3 className="text-2xl font-semibold text-gray-800 dark:text-white">
+              <h3 className="text-2xl font-semibold text-gray-800 dark:text-white font-title">
                 Our Vision
               </h3>
             </CardHeader>
             <CardContent>
-              <p className="">
+              <p className="font-description">
                 We envision a world where access to medicine is seamless,
                 transparent, and safe. Our goal is to be the most trusted and
                 preferred online pharmacy platform.
@@ -92,10 +92,10 @@ const About = () => {
         <div className="mt-12">
           <Card>
             <CardHeader>
-              <h3 className="text-2xl font-semibold t">Our Story</h3>
+              <h3 className="text-2xl font-semibold font-title">Our Story</h3>
             </CardHeader>
             <CardContent>
-              <p className="">
+              <p className="font-description">
                 Founded in 2020, Your Website Name started as a small initiative
                 to bridge the gap between patients and pharmacies. Over the
                 years, we have grown into a trusted platform serving thousands
@@ -116,10 +116,10 @@ const About = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card className=" transition-all">
               <CardHeader>
-                <h3 className="text-xl font-semibold ">Integrity</h3>
+                <h3 className="text-xl font-semibold font-title ">Integrity</h3>
               </CardHeader>
               <CardContent>
-                <p className="">
+                <p className="font-description">
                   We are committed to honesty, transparency, and ethical
                   practices in all our operations.
                 </p>
@@ -127,10 +127,10 @@ const About = () => {
             </Card>
             <Card className=" transition-all">
               <CardHeader>
-                <h3 className="text-xl font-semibold ">Customer-Centric</h3>
+                <h3 className="text-xl font-semibold font-title">Customer-Centric</h3>
               </CardHeader>
               <CardContent>
-                <p className="">
+                <p className="font-description">
                   Our customers are at the heart of everything we do. We strive
                   to exceed their expectations.
                 </p>
@@ -138,10 +138,10 @@ const About = () => {
             </Card>
             <Card className=" transition-all">
               <CardHeader>
-                <h3 className="text-xl font-semibold ">Innovation</h3>
+                <h3 className="text-xl font-semibold font-title ">Innovation</h3>
               </CardHeader>
               <CardContent>
-                <p className="">
+                <p className="font-description">
                   We continuously innovate to improve our services and make
                   healthcare more accessible.
                 </p>
@@ -158,7 +158,7 @@ const About = () => {
           />
 
           {/* Testimonial Carousel */}
-          <div className="relative">
+          <div className="relative mx-5">
             <ReviewSection />
           </div>
 
@@ -166,7 +166,7 @@ const About = () => {
           <div className="">
             <Card>
               <CardHeader>
-                <h3 className="text-xl font-semibold ">Leave a Review</h3>
+                <h3 className="text-xl font-semibold font-title">Leave a Review</h3>
               </CardHeader>
               <CardContent>
                 <Form {...form}>
@@ -209,7 +209,7 @@ const About = () => {
                     <Button
                       type="submit"
                       variant="default"
-                      className="w-full mt-5"
+                      className="w-full mt-5 font-description"
                     >
                       Submit Review
                     </Button>

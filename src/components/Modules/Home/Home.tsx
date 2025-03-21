@@ -4,7 +4,6 @@ import ProductCard from "../Shared/Product/ProductCard";
 import Banner from "./Banner/Banner";
 import TitleContainer from "../Shared/TitleContainer/TitleContainer";
 import { PackageSearch } from "lucide-react";
-import BrandingSection from "./Banner/BrandingSection";
 import ReviewSection from "./ReviewSection/ReviewSection";
 import FeaturesSection from "./Banner/FeaturesSection";
 import { Button } from "@/components/ui/button";
@@ -34,7 +33,7 @@ const Home = ({ medicines }: { medicines: IMedicine[] }) => {
           ) : (
             <div className="col-span-full flex flex-col items-center justify-center py-12">
               <PackageSearch className="text-gray-400 text-6xl mb-4" />
-              <p className="text-gray-500 text-lg font-medium">
+              <p className="text-gray-500 text-lg font-medium font-description">
                 No medicines available
               </p>
             </div>
@@ -43,7 +42,7 @@ const Home = ({ medicines }: { medicines: IMedicine[] }) => {
 
         <div className="mt-6 text-center">
           <Button>
-            <Link href="/shop">Shop here</Link>{" "}
+            <Link className="font-description" href="/shop">Shop here</Link>{" "}
           </Button>
         </div>
       </div>

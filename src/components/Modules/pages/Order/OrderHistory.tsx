@@ -25,17 +25,17 @@ const OrderHistory = ({ orders }: { orders: IOrderHistoryResponse }) => {
       {result.length === 0 ? (
         <div>
           <Card className="w-full max-w-5xl shadow-xl p-6 rounded-lg">
-            <CardHeader className="text-center text-3xl font-bold p-4">
+            <CardHeader className="text-center text-2xl font-bold p-4 font-title">
               Your Order History
             </CardHeader>
             <Separator />
             <CardContent className="space-y-4 mt-5 text-center overflow-x-auto">
-              <p className="">No items in your order history.</p>
+              <p className="font-description">No items in your order history.</p>
               <div>
                 <Link href="/">
                   <Button
                     variant="outline"
-                    className="w-full py-3 text-lg  transition-colors"
+                    className="w-full py-3 text-lg  transition-colors font-description"
                   >
                     Continue Shopping
                   </Button>
@@ -47,13 +47,13 @@ const OrderHistory = ({ orders }: { orders: IOrderHistoryResponse }) => {
       ) : (
         <Card className=" shadow-lg rounded-lg">
           <CardHeader>
-            <CardTitle className="text-2xl font-bold ">
+            <CardTitle className="text-2xl font-bold font-title">
               Your Order History
             </CardTitle>
             {totalCost > 0 && (
-              <div className="text-lg font-semibold  mt-2">
+              <div className="text-lg font-semibold  mt-2 font-description">
                 Total Cost:{" "}
-                <span className="text-blue-600">${totalCost.toFixed(2)}</span>
+                <span className="text-blue-600 font-title">${totalCost.toFixed(2)}</span>
               </div>
             )}
           </CardHeader>
@@ -61,14 +61,14 @@ const OrderHistory = ({ orders }: { orders: IOrderHistoryResponse }) => {
             <Table className="w-full">
               <TableHeader>
                 <TableRow>
-                  <TableHead className="text-lg font-semibold ">
+                  <TableHead className="text-lg font-semibold font-title ">
                     Product Name(s)
                   </TableHead>
-                  <TableHead className="text-lg font-semibold ">Date</TableHead>
-                  <TableHead className="text-lg font-semibold ">
+                  <TableHead className="text-lg font-semibold font-title">Date</TableHead>
+                  <TableHead className="text-lg font-semibold font-title">
                     Total
                   </TableHead>
-                  <TableHead className="text-lg font-semibold ">
+                  <TableHead className="text-lg font-semibold font-title">
                     Status
                   </TableHead>
                 </TableRow>
@@ -88,7 +88,7 @@ const OrderHistory = ({ orders }: { orders: IOrderHistoryResponse }) => {
                           >
                             <Link
                               href={`/shop/${product?.medicineId?._id}`}
-                              className="text-md font-semibold"
+                              className="text-md font-semibold font-description"
                             >
                               {product?.medicineId?.name || "Unknown Product"}
                             </Link>
@@ -96,15 +96,15 @@ const OrderHistory = ({ orders }: { orders: IOrderHistoryResponse }) => {
                         ))}
                       </ul>
                     </TableCell>
-                    <TableCell className="text-lg font-semibold">
+                    <TableCell className="text-lg font-semibold font-title">
                       {order?.createdAt
                         ? new Date(order.createdAt).toLocaleDateString()
                         : "N/A"}
                     </TableCell>
-                    <TableCell className="font-semibold">
+                    <TableCell className="font-semibold font-title">
                       ${order?.totalPrice?.toFixed(2) || "0.00"}
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="font-description">
                       {order?.orderIntent === "completed" ? (
                         <Badge className="bg-green-500 text-white">
                           Completed
