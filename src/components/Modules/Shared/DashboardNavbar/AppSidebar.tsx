@@ -49,13 +49,6 @@ const navMain = [
     title: "Mange-Products",
     url: "/dashboard/manage-products",
     icon: ListOrdered,
-    items: [
-      {
-        title: "Add Product",
-        url: "/dashboard/manage-products/add-product",
-        icon: PlusIcon,
-      },
-    ],
   },
 ];
 
@@ -89,13 +82,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <Sidebar collapsible="icon" {...props}>
       <SidebarContent>
         <NavMain items={navMain} />
+
+        <div className="text-center">
+          {userData && <UserProfile user={userData} logoutFn={handleLogout} />}
+        </div>
         <div className="text-center">
           <ThemeToggle />
         </div>
       </SidebarContent>
-      <SidebarFooter>
-        {userData && <UserProfile user={userData} logoutFn={handleLogout} />}
-      </SidebarFooter>
+      <SidebarFooter></SidebarFooter>
       <SidebarRail />
     </Sidebar>
   );

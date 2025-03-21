@@ -21,16 +21,16 @@ const Dashboard = ({ data }: DashboardProps) => {
       {metrics.map((item, index) => (
         <Card
           key={index}
-          className="border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200"
+          className="border border-gray-200 transition-shadow duration-200"
         >
           <CardHeader className="flex flex-row items-center justify-between pb-3">
-            <CardTitle className="text-lg font-semibold text-gray-700">
+            <CardTitle className="text-lg font-title  font-semibold">
               {item.title}
             </CardTitle>
-            <ArrowUpRight className="w-5 h-5 text-gray-500" />
+            <ArrowUpRight className="w-5 font-title h-5 " />
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold text-gray-900">
+            <p className="text-3xl font-bold ">
               {item.value}
             </p>
           </CardContent>

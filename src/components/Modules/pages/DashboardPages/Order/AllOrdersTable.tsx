@@ -12,21 +12,20 @@ import {
 import { IMeta, IOrderHistoryResponse, Order } from "@/types/orderTypes";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { PaginationDemo } from "../Product/All-Products/DemoPagination";
 import { updateOrderIntentStatus } from "@/utils/actions/orders";
 import Image from "next/image";
+import { CardHeader } from "@/components/ui/card";
+import { useState } from "react";
 
 const AllOrdersTable = ({
   orders,
-  meta,
 }: {
   orders: IOrderHistoryResponse;
   meta: IMeta;
 }) => {
   const router = useRouter();
-
-  console.log(orders);
 
   // Function to update order intent
   const handleUpdateIntent = async (orderId: string, newIntent: string) => {
@@ -48,7 +47,15 @@ const AllOrdersTable = ({
   };
 
   return (
-    <>
+    <div className="rounded-md border shadow-sm">
+      <CardHeader>
+        <div className="text-xl font-semibold font-title">
+          Total Orders :{" "}
+          <span className="text-blue-600 font-title text-xl">
+            {orders?.meta?.total}
+          </span>
+        </div>
+      </CardHeader>
       <Table>
         <TableHeader>
           <TableRow>
@@ -160,22 +167,12 @@ const AllOrdersTable = ({
               </TableRow>
             );
           })}
-
-          <TableCell>
-            <Badge variant="secondary" className=" font-bold "></Badge>
-          </TableCell>
         </TableBody>
-        <TableFooter>
-          <TableRow className="text-lg">
-            <TableCell colSpan={3}>Total Orders</TableCell>
-            <TableCell className="text-right">{orders?.meta.total}</TableCell>
-          </TableRow>
-        </TableFooter>
       </Table>
       <div className="my-2">
         <PaginationDemo metadata={orders?.meta} />
       </div>
-    </>
+    </div>
   );
 };
 

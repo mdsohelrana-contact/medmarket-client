@@ -12,7 +12,9 @@ export const getMonthlyAnalytic = async () => {
       headers: {
         authorization: (await cookies()).get("accessToken")!.value,
       },
-     
+      next: {
+        tags: ["MONTHLY_ANALYTIC"],
+      },
     });
 
     const data = await res.json();
@@ -31,6 +33,9 @@ export const getDashboardReport = async () => {
       method: "GET",
       headers: {
         authorization: (await cookies()).get("accessToken")!.value,
+      },
+      next: {
+        tags: ["MONTHLY_ANALYTIC"],
       },
     });
 

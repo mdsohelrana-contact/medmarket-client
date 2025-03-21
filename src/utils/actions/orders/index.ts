@@ -59,11 +59,10 @@ export const updateOrderIntentStatus = async (
          body: JSON.stringify(status),
        }
      );
-     revalidateTag("ORDERS");
- 
+     
      const data = await res.json();
- 
-     console.log(data,"data from server")
+     revalidateTag("ORDERS");
+
  
      return data;
    } catch (error: any) {

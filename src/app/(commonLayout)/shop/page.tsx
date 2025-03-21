@@ -4,7 +4,7 @@ import { getAllProducts } from "@/utils/actions/products";
 const ShopPage = async () => {
   const { data,meta } = await getAllProducts();
   return (
-    <div className="my-10">
+    <div className="mt-14 md:mt-10">
       <ShopHome medicines={data} meta={meta} />
     </div>
   );

@@ -1,30 +1,13 @@
 "use server";
 
+import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
 // only admin
-export const getAllUsers = async (query?: {
-  [key: string]: string | string[] | undefined;
-}) => {
+export const getAllUsers = async (query?:number) => {
   try {
-    const queryParams = new URLSearchParams();
 
-    if (query?.name) {
-      queryParams.append("name", query?.name.toString());
-    }
-    if (query?.category) {
-      queryParams.append("category", query?.category.toString());
-    }
-    if (query?.symptoms) {
-      queryParams.append(
-        "symptoms",
-        query?.symptoms?.includes(query?.symptoms.toString()).toString()
-      );
-    }
-
-    const url = `${process.env.NEXT_PUBLIC_BASE_API}/users?page=${query?.page}&${queryParams}&sort=${query?.sort}`;
-
-    // const token = (await cookies()).get("accessToken")?.value || "";
+    const url = `${process.env.NEXT_PUBLIC_BASE_API}/users?page=${query}`;
 
     const res = await fetch(url, {
       method: "GET",
@@ -56,6 +39,29 @@ export const deleteUser = async (id: string) => {
         "Content-Type": "application/json",
         Authorization: (await cookies()).get("accessToken")?.value || "",
       },
+    });
+
+    const data = await res.json();
+
+    revalidateTag("USERS"); 
+
+    return data;
+  } catch (error: any) {
+    console.error("API Error:", error.message);
+  }
+};
+
+// get user by id
+export const getUserById = async (id: string) => {
+  try {
+    const url = `${process.env.NEXT_PUBLIC_BASE_API}/users/${id}`;
+
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: (await cookies()).get("accessToken")!.value,
+      },
       next: {
         tags: ["USERS"],
       },
@@ -69,26 +75,25 @@ export const deleteUser = async (id: string) => {
   }
 };
 
-// get user by id
-
-export const getUserById = async (id: string) => {
+// update user info
+export const updateUser = async (userId: string, data: any) => {
   try {
-    const url = `${process.env.NEXT_PUBLIC_BASE_API}/users/${id}`;
+    const url = `${process.env.NEXT_PUBLIC_BASE_API}/user/${userId}`;
 
     const res = await fetch(url, {
-      method: "GET",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        authorization:(await cookies()).get("accessToken")!.value,
+        authorization: (await cookies()).get("accessToken")!.value,
       },
-      next: {
-        tags: ["USERS"],
-      },
+      body: JSON.stringify(data),
     });
 
-    const data = await res.json();
+    const updateUserInfo = await res.json();
 
-    return data;
+    revalidateTag("USERS"); 
+
+    return updateUserInfo;
   } catch (error: any) {
     console.error("API Error:", error.message);
   }

@@ -15,17 +15,17 @@ interface IMonthly {
 }
 
 const DashboardHome = ({ monthly }: { monthly: IMonthly[] }) => {
+ 
   // Format the data for the chart
   const formattedData = monthly?.map((item) => ({
     month: item._id,
     totalSales: item.totalSales || 0,
   }));
 
-  console.log(monthly)
 
   return (
     <div className="p-4 border border-gray-200 rounded-xl">
-      <h2 className="text-lg font-semibold mb-4">Monthly Sales</h2>
+      <h2 className="text-lg font-semibold mb-4 font-title">Monthly Sales</h2>
       {formattedData?.length > 0 ? (
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={formattedData}>
@@ -36,7 +36,7 @@ const DashboardHome = ({ monthly }: { monthly: IMonthly[] }) => {
           </BarChart>
         </ResponsiveContainer>
       ) : (
-        <p className="text-gray-500">No sales data available.</p>
+        <p className="text-gray-500 font-description">No sales data available.</p>
       )}
     </div>
   );

@@ -17,8 +17,8 @@ export const addToCart = async (data: any) => {
       body: JSON.stringify(data),
     });
 
-    revalidateTag("CART");
     const cartData = await res.json();
+    revalidateTag("CART");
 
     return cartData;
   } catch (error: any) {
@@ -56,8 +56,8 @@ export const updateQuantityCartItem = async (data: any) => {
       },
       body: JSON.stringify(data),
     });
-    revalidateTag("CARTS");
     const updatedCart = await res.json();
+    revalidateTag("CARTS");
     return updatedCart;
   } catch (error: any) {
     return Error(error.message);
@@ -73,8 +73,9 @@ export const clearCart = async () => {
         authorization: (await cookies()).get("accessToken")!.value,
       },
     });
+
+    const clearCartData =await res.json();
     revalidateTag("CARTS");
-    const clearCartData = res.json();
 
     return clearCartData;
   } catch (error: any) {
@@ -94,9 +95,9 @@ export const deleteCartItem = async (medicineId: string) => {
         },
       }
     );
-    revalidateTag("CARTS");
-
+    
     const removeData = await res.json();
+    revalidateTag("CARTS");
     return removeData;
   } catch (error: any) {
     return Error(error.message);

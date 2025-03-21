@@ -25,7 +25,7 @@ const DemoBanner = ({
   return (
     <div
       className="relative flex items-center justify-center h-[300px] md:h-[400px] lg:h-[500px] bg-cover bg-center text-center "
-      style={{ backgroundImage: `url(${imagePath || "/images/banner.jpg"})`,
+      style={{ backgroundImage: `url(${imagePath || "/images/users.jpg"})`,
          borderRadius: '20px'
        }}
     >

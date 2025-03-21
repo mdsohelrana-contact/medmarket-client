@@ -27,6 +27,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useState } from "react";
+import Link from "next/link";
+import { CardHeader } from "@/components/ui/card";
 
 const AllProductsTable = ({
   medicines,
@@ -82,7 +84,15 @@ const AllProductsTable = ({
 
   return (
     <>
-      <div className="my-5 text-center mx-auto">
+      <div className="my-5 text-center mx-auto ">
+        <div className="mb-5">
+          <Button variant="default">
+            <Link href="/dashboard/manage-products/add-product">
+              Add Product
+            </Link>
+          </Button>
+        </div>
+
         {/* Sorting Dropdown */}
         <Select onValueChange={handleSortChange} value={sortOrder}>
           <SelectTrigger>
@@ -98,64 +108,68 @@ const AllProductsTable = ({
           </SelectContent>
         </Select>
       </div>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="">Name</TableHead>
-            <TableHead>Need RX</TableHead>
-            <TableHead>In-Stock</TableHead>
-            <TableHead className="text-right">Price</TableHead>
-            <TableHead className="text-right">Update</TableHead>
-            <TableHead className="text-right">Delete</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {medicines?.map((medicine) => (
-            <TableRow key={medicine?._id} className="font-medium">
-              <TableCell>{medicine?.name}</TableCell>
-
-              {medicine?.prescription_required ? (
-                <TableCell className="">
-                  <Badge variant="default">Yes</Badge>
-                </TableCell>
-              ) : (
-                <TableCell className="">
-                  {" "}
-                  <Badge variant="outline">No</Badge>
-                </TableCell>
-              )}
-              <TableCell>{medicine?.stock}</TableCell>
-              <TableCell className="text-right">${medicine?.price}</TableCell>
-              <TableCell className="text-right">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => handleRemoveMedicine(medicine?._id)}
-                >
-                  <Trash2 className="w-6 h-6 text-red-500" />
-                </Button>
-              </TableCell>
-              <TableCell className="text-right">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => handleUpdateMedicine(medicine?._id)}
-                >
-                  <Edit className="w-6 h-6 " />
-                </Button>
-              </TableCell>
+      <div className="rounded-md border shadow-sm px-1">
+        <CardHeader>
+          <div className="text-xl font-semibold font-title">
+            Total Medicines :{" "}
+            <span className="text-blue-600 font-title text-xl">
+               {meta.total}
+            </span>
+          </div>
+        </CardHeader>
+        <Table className="">
+          <TableHeader>
+            <TableRow>
+              <TableHead className="">Name</TableHead>
+              <TableHead>Need RX</TableHead>
+              <TableHead>In-Stock</TableHead>
+              <TableHead className="text-right">Price</TableHead>
+              <TableHead className="text-right">Update</TableHead>
+              <TableHead className="text-right">Delete</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-        <TableFooter>
-          <TableRow className="text-lg">
-            <TableCell colSpan={3}>Total Medicines</TableCell>
-            <TableCell className="text-right">{meta.total}</TableCell>
-          </TableRow>
-        </TableFooter>
-      </Table>
-      <div className="my-2">
-        <PaginationDemo metadata={meta} />
+          </TableHeader>
+          <TableBody>
+            {medicines?.map((medicine) => (
+              <TableRow key={medicine?._id} className="font-medium">
+                <TableCell>{medicine?.name}</TableCell>
+
+                {medicine?.prescription_required ? (
+                  <TableCell className="">
+                    <Badge variant="default">Yes</Badge>
+                  </TableCell>
+                ) : (
+                  <TableCell className="">
+                    {" "}
+                    <Badge variant="outline">No</Badge>
+                  </TableCell>
+                )}
+                <TableCell>{medicine?.stock}</TableCell>
+                <TableCell className="text-right">${medicine?.price}</TableCell>
+                <TableCell className="text-right">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => handleRemoveMedicine(medicine?._id)}
+                  >
+                    <Trash2 className="w-6 h-6 text-red-500" />
+                  </Button>
+                </TableCell>
+                <TableCell className="text-right">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => handleUpdateMedicine(medicine?._id)}
+                  >
+                    <Edit className="w-6 h-6 " />
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        <div className="my-2">
+          <PaginationDemo metadata={meta} />
+        </div>
       </div>
     </>
   );

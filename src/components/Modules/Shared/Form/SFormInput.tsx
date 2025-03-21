@@ -17,7 +17,7 @@ interface IFormInputProps {
   label?: string;
   placeholder?: string;
   control: Control<any>;
-  type?: "text" | "password" | "number" 
+  type?: "text" | "password" | "number";
 }
 
 const SFormInput = ({

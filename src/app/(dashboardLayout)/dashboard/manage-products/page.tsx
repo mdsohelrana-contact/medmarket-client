@@ -15,10 +15,13 @@ const ManageProductsPage = async ({
 
   return (
     <div className="">
-      <DemoBanner
-        title="Manage All-Products Here"
-        description="This is all products manage page"
-      />
+      <div className="px-3">
+        <DemoBanner
+          title="Manage All-Products Here"
+          description="This is all products manage page"
+          imagePath="/images/products.jpg"
+        />
+      </div>
       <div className="p-5">
         <AllProductsTable medicines={medicines} meta={meta} />
       </div>

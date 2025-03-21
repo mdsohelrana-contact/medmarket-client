@@ -25,7 +25,7 @@ type FormData = {
   stock: string;
   rating: number;
   imageUrl: string[];
-  manufacturer_details:string;
+  manufacturer_details: string;
   prescription_required: boolean;
 };
 
@@ -100,14 +100,12 @@ const AddProductForm = () => {
   };
 
   return (
-    <section className=" py-8 px-4 mx-auto w-full lg:py-16">
-      <h2 className="mb-4 text-xl font-bold ">
-        Add a New Medicine
-      </h2>
+    <section className="w-full md:w-10/12  py-8 px-4 mx-auto  lg:py-16">
+      <h2 className="mb-4 text-xl font-bold ">Add a New Medicine</h2>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)}>
-          <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
+          <div className="grid gap-5 grid-cols-1 md:grid-cols-2 justify-end items-center">
             <SFormInput
               control={form.control}
               name="name"
@@ -120,7 +118,6 @@ const AddProductForm = () => {
               label="Generic Name"
               placeholder="Enter generic name..."
             />
-
             <SFormInput
               control={form.control}
               name="manufacturer_details"
@@ -128,6 +125,38 @@ const AddProductForm = () => {
               placeholder="Enter Manufacturer details..."
             />
 
+            <SFormInput
+              control={form.control}
+              name="category"
+              label="Category"
+              placeholder="Enter category..."
+            />
+
+            {/* Price and Stock Inputs */}
+            <SFormInput
+              control={form.control}
+              name="price"
+              label="Price"
+              placeholder="Enter price..."
+              type="number"
+            />
+            <SFormInput
+              control={form.control}
+              name="stock"
+              label="Stock"
+              placeholder="Enter stock..."
+              type="number"
+            />
+            <SFormInput
+              control={form.control}
+              name="rating"
+              label="Rating"
+              placeholder="Enter rating..."
+              type="number"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2  justify-center items-center gap-5 my-5">
             {/* Brand name as Dynamic Array */}
             <div className="">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -158,13 +187,6 @@ const AddProductForm = () => {
                 Add Another Brand Name
               </button>
             </div>
-
-            <SFormInput
-              control={form.control}
-              name="category"
-              label="Category"
-              placeholder="Enter category..."
-            />
 
             {/* Symptoms as Dynamic Array */}
             <div>
@@ -198,6 +220,7 @@ const AddProductForm = () => {
               </button>
             </div>
 
+            {/* Strength as Dynamic Array */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Strength
@@ -229,7 +252,7 @@ const AddProductForm = () => {
             </div>
 
             {/* Dosage Form as Dynamic Array */}
-            <div className="sm:col-span-2">
+            <div className="">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Dosage Form
               </label>
@@ -258,39 +281,16 @@ const AddProductForm = () => {
                 Add Another Dosage Form
               </button>
             </div>
-
-            {/* Price and Stock Inputs */}
-            <SFormInput
-              control={form.control}
-              name="price"
-              label="Price"
-              placeholder="Enter price..."
-              type="number"
-            />
-            <SFormInput
-              control={form.control}
-              name="stock"
-              label="Stock"
-              placeholder="Enter stock..."
-              type="number"
-            />
-            <SFormInput
-              control={form.control}
-              name="rating"
-              label="Rating"
-              placeholder="Enter rating..."
-              type="number"
-            />
-
-            {/* Image Upload  */}
-            <SFormImageUpload
-              control={form.control}
-              name="imageUrl"
-              label="Medicine Images"
-              multiple={true}
-              onImageUpload={setMedicineImageUrl}
-            />
           </div>
+
+          {/* Image Upload  */}
+          <SFormImageUpload
+            control={form.control}
+            name="imageUrl"
+            label="Medicine Images"
+            multiple={true}
+            onImageUpload={setMedicineImageUrl}
+          />
 
           {/* Prescription Required Toggle */}
           <div className="sm:col-span-2 flex items-center">

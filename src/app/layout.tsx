@@ -23,20 +23,22 @@ const openSans = Open_Sans({
 });
 
 // Metadata
+// Metadata
 export const metadata: Metadata = {
-  title: "Your Website Title | Best Services & Solutions",
+  title: "MedStore | Buy Medicines Online with Ease",
   description:
-    "Discover top-notch services and solutions at Your Website. We provide expert advice, high-quality content, and seamless experiences.",
+    "Shop for all your medicine needs at Medicine Ecommerce. We offer a wide range of medications, health products, and wellness solutions with fast delivery and excellent customer service.",
 
   keywords: [
-    "Next.js",
-    "SEO Optimization",
-    "Web Development",
-    "Digital Marketing",
-    "Modern UI/UX",
+    "Medicine e-commerce",
+    "Online Pharmacy",
+    "Health Products",
+    "Buy Medicines Online",
+    "Wellness Solutions",
+    "Fast Delivery",
   ],
 
-  authors: [{ name: "Your Name", url: "https://yourwebsite.com" }],
+  authors: [{ name: "Md Sohel Rana", url: "https://next-assignment-six-alpha.vercel.app/" }],
 };
 
 const RootLayout = ({

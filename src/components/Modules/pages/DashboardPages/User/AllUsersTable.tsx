@@ -15,14 +15,6 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Trash2 } from "lucide-react";
 import { deleteUser } from "@/utils/actions/user/userActions";
-
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -36,6 +28,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { IMeta } from "@/types/orderTypes";
 import { PaginationDemo } from "../Product/All-Products/DemoPagination";
+import { CardHeader, CardTitle } from "@/components/ui/card";
 
 interface AllUsersTableProps {
   users: IUser[];
@@ -68,34 +61,36 @@ const AllUsersTable = ({ users, meta }: AllUsersTableProps) => {
 
   return (
     <div className="rounded-md border shadow-sm">
+      <CardHeader>
+        <div className="text-xl font-semibold font-title">
+          Total Users : {" "}
+          <span className="text-blue-600 font-title text-xl">{meta?.total}</span>
+        </div>
+      </CardHeader>
       <Table>
-        <TableHeader className="bg-gray-50">
+        <TableHeader>
           <TableRow>
-            <TableHead className="font-semibold text-gray-700">Name</TableHead>
-            <TableHead className="font-semibold text-gray-700">Phone</TableHead>
-            <TableHead className="font-semibold text-gray-700">Email</TableHead>
-            <TableHead className="font-semibold text-gray-700 text-right">
-              Role
-            </TableHead>
-            <TableHead className="font-semibold text-gray-700 text-right">
-              Action
-            </TableHead>
+            <TableHead className="font-semibold">Name</TableHead>
+            <TableHead className="font-semibold">Phone</TableHead>
+            <TableHead className="font-semibold">Email</TableHead>
+            <TableHead className="font-semibold text-right">Role</TableHead>
+            <TableHead className="font-semibold text-right">Action</TableHead>
           </TableRow>
         </TableHeader>
 
         <TableBody>
           {users.length === 0 ? (
             <TableRow>
-              <TableCell colSpan={5} className="text-center text-gray-500 py-6">
+              <TableCell colSpan={5} className="text-center py-6">
                 No users available.
               </TableCell>
             </TableRow>
           ) : (
             users.map((user) => (
-              <TableRow key={user._id} className="hover:bg-gray-50">
-                <TableCell className="text-gray-800">{user.name}</TableCell>
-                <TableCell className="text-gray-600">{user.phone}</TableCell>
-                <TableCell className="text-gray-600">{user.email}</TableCell>
+              <TableRow key={user._id} className="">
+                <TableCell className="">{user.name}</TableCell>
+                <TableCell>{user.phone}</TableCell>
+                <TableCell>{user.email}</TableCell>
                 <TableCell className="text-right">
                   <Badge variant="outline" className="text-sm">
                     {user.role}
@@ -140,17 +135,6 @@ const AllUsersTable = ({ users, meta }: AllUsersTableProps) => {
             ))
           )}
         </TableBody>
-
-        <TableFooter className="bg-gray-50">
-          <TableRow>
-            <TableCell colSpan={4} className="font-semibold text-gray-700">
-              Total Users
-            </TableCell>
-            <TableCell className="text-right font-semibold text-gray-700">
-              {meta.total}
-            </TableCell>
-          </TableRow>
-        </TableFooter>
       </Table>
 
       <div className="text-center flex justify-center mx-auto w-full my-5">
