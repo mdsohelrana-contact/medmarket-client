@@ -1,99 +1,105 @@
+# MedStore – Modern Medical E-commerce Platform
 
-# MedStore - E-commerce Platform
-
-MedStore is a modern e-commerce application built using providing a seamless shopping experience for medical products. The project follows best practices in performance, accessibility, and scalability.
-
+MedStore is a full-stack e-commerce application designed to deliver a fast, secure, and seamless shopping experience for medical products. Built with scalable technologies and industry best practices, it delivers optimal performance, accessibility, and maintainability.
 
 ---
 
-## Features !!
+## ✅ Key Features
 
-- Fast and Scalable: Built with Next.js for server-side rendering and static site generation.
-- User Authentication: Supports authentication using Firebase/Auth or other third-party providers.
-- Admin Dashboard: Manage products, orders, and users from a dedicated admin panel.
-- Order Tracking: Customers can track their orders in real time.
-- Search and Filtering: Advanced search functionality with category and price filtering.
+- ⚡ **High Performance** – Built using **Next.js** with server-side rendering (SSR) and static site generation (SSG) for blazing-fast load times
+- 🔐 **User Authentication** – Secure authentication using **Firebase Auth** and support for third-party providers
+- 🛠️ **Admin Dashboard** – Full management of products, orders, and users from a protected admin panel
+- 🚚 **Real-time Order Tracking** – Users can track their order status any time
+- 🔎 **Advanced Search & Filtering** – Category, keyword and price filtering for improved discoverability
 
 ---
 
+## 🧰 Tech Stack
 
-###  `Technologies` Used
+| Layer | Technologies |
+|------|--------------|
+| Backend | **Express.js** (TypeScript) |
+| Database | **MongoDB** + **Mongoose** |
+| Environment | Managed with **dotenv** |
+| Error Handling | Global error handler module |
 
-- Backend : `Express.js` with `TypeScript`
-- Database : `MongoDB` with `Mongoose`
-- Error Handling : Fllow globals errorHandle model
-- Environment Variables : Managed with `dotenv`
+---
 
+## 🛠️ Local Development Setup
 
-## Run Locally
-
-Clone the project
-
+**Clone the repository**
 ```bash
-  https://github.com/rana5699/next-six-client
+https://github.com/rana5699/next-six-client
 ```
 
-Go to the project directory
-
+**Navigate to the project directory**
 ```bash
- cd medstore
-
+cd medstore
 ```
 
-Install dependencies
-
+**Install dependencies**
 ```bash
-  npm install -y
+npm install
 ```
 
-Start the server
-
+**Start the development server**
 ```bash
-  npm run dev
+npm run dev
 ```
 
+---
 
+## 🔧 Environment Variables
+Create a `.env` file at the root of the project and add the following variables:
 
-## Environment Variables
-
-To run this project, you will need to add the following environment variables to your `.env` file
-
-`NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`
-
-`CLOUDINARY_API_SECRET`
-
-`NEXT_PUBLIC_CLOUDINARY_API_KEY`
-
-`NEXT_PUBLIC_BASE_API`
-
-`NEXT_PUBLIC_FAKE_IMAGE_URL`
-
-
-
-
-
-
-## API Reference
-
-### Authentication
-
-## Users
-
-### Register User (POST)
-
-```http
-  /api/auth/register
+```
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
+CLOUDINARY_API_SECRET
+NEXT_PUBLIC_CLOUDINARY_API_KEY
+NEXT_PUBLIC_BASE_API
+NEXT_PUBLIC_FAKE_IMAGE_URL
 ```
 
+---
 
-#### Login user (POST)
+## 🔗 API Endpoints
 
-```http
-  /api/auth/login
-```
+### Authentication Routes
+| Action | Method | Endpoint |
+|--------|--------|---------------------------|
+| Register | POST | `/api/auth/register` |
+| Login | POST | `/api/auth/login` |
 
+---
 
+## 📸 Screenshots
 
-## Server Live URL
+> _Below are a few example screenshots of the application (Home, Product Details, Admin Dashboard)._  
+_Add your image links here_
 
-https://next-assignment-six-alpha.vercel.app/
+---
+
+## 🌐 Live Demo
+
+👉 https://next-assignment-six-alpha.vercel.app/
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please open an issue to discuss your proposal or submit a pull request.
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** — feel free to use and adapt it for your own projects.
+
+---
+
+## 🔗 Additional Repositories
+
+| Repository | Description |
+|-----------|-------------|
+| **CycleHub** | Full-featured bicycle e-commerce platform 👉 https://github.com/mdsohelrana-contact/premium-bycycle-stroe-server |
+| **Eventlyze** | Event planning & participation system 👉 https://github.com/mdsohelrana-contact/eventlyze-client |
